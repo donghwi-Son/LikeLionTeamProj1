@@ -11,7 +11,7 @@ public class sdh_Player : MonoBehaviour
 
     void Start()
     {
-        // SpriteRenderer ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+        // SpriteRenderer ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
         psr = GetComponent<SpriteRenderer>();
         gunsr = gunT.GetComponent<SpriteRenderer>();
     }
@@ -24,24 +24,24 @@ public class sdh_Player : MonoBehaviour
 
     private void FlipPlayerAndGun()
     {
-        // ¸¶¿ì½º À§Ä¡ °è»ê
+        // ë§ˆìš°ìŠ¤ ìœ„ì¹˜ ê³„ì‚°
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // ¸¶¿ì½º À§Ä¡¿¡ µû¶ó Flip ¼³Á¤
+        // ë§ˆìš°ìŠ¤ ìœ„ì¹˜ì— ë”°ë¼ Flip ì„¤ì •
         if (mousePosition.x < transform.position.x)
         {
-            // ¸¶¿ì½º°¡ ¿ŞÂÊÀÏ ¶§
+            // ë§ˆìš°ìŠ¤ê°€ ì™¼ìª½ì¼ ë•Œ
             psr.flipX = true;
-            gunsr.flipY = true; // ÃÑµµ ¼öÁ÷ ¹İÀü
+            gunsr.flipY = true; // ì´ë„ ìˆ˜ì§ ë°˜ì „
             fp.localPosition = new Vector3(fp.localPosition.x, -Mathf.Abs(fp.localPosition.y), fp.localPosition.z);
  
         }
         else
         {
-            // ¸¶¿ì½º°¡ ¿À¸¥ÂÊÀÏ ¶§
+            // ë§ˆìš°ìŠ¤ê°€ ì˜¤ë¥¸ìª½ì¼ ë•Œ
             psr.flipX = false;
-            gunsr.flipY = false; // ÃÑ ¿ø·¡ ¹æÇâ
+            gunsr.flipY = false; // ì´ ì›ë˜ ë°©í–¥
             fp.localPosition = new Vector3(fp.localPosition.x, Mathf.Abs(fp.localPosition.y), fp.localPosition.z);
         }
     }
@@ -52,7 +52,7 @@ public class sdh_Player : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
         Vector3 vec = new Vector3(moveX, moveY, 0);
 
-        if (vec.magnitude > 1) // ´ë°¢¼± ÀÌµ¿ ½Ã Á¤±ÔÈ­
+        if (vec.magnitude > 1) // ëŒ€ê°ì„  ì´ë™ ì‹œ ì •ê·œí™”
         {
             vec.Normalize();
         }
