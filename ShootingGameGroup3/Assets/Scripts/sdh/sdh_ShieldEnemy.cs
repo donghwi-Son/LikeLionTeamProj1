@@ -4,11 +4,13 @@ public class sdh_ShieldEnemy : MonoBehaviour
 {
     public float HP = 10;
     Transform pt;   //플레이어 transform
+    Rigidbody2D rb;
     float speed = 1f;
     float turnDelay = 0.1f;
     float nextCheckTime = 0;
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         GameObject playerObject = GameObject.FindWithTag("Player");
         if (playerObject != null)
         {
@@ -17,9 +19,9 @@ public class sdh_ShieldEnemy : MonoBehaviour
     }
     private void Update()
     {
+        MoveTowardPlayer();
 
-        Vector3 direction = (pt.position - transform.position).normalized;
-        transform.position += direction * speed * Time.deltaTime;
+
         if (Time.time >= nextCheckTime)
         {
             CheckFlipX();
@@ -27,7 +29,10 @@ public class sdh_ShieldEnemy : MonoBehaviour
         }
 
     }
-
+    void MoveTowardPlayer()
+    {
+        rb.linearVelocity = (pt.position - transform.position).normalized * speed;
+    }
     void CheckFlipX()
     {
         if (transform.position.x < pt.position.x) // 적이 왼쪽
