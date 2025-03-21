@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class sdh_Bullet : MonoBehaviour
 {
-    float speed = 10f; // ÃÑ¾Ë ¼Óµµ
+    float speed = 10f; // ì´ì•Œ ì†ë„
     public float dmg;
-    private Vector3 direction; // ÃÑ¾ËÀÌ ³¯¾Æ°¥ ¹æÇâ
+    private Vector3 direction; // ì´ì•Œì´ ë‚ ì•„ê°ˆ ë°©í–¥
     Rigidbody2D rb;
 
 
@@ -27,12 +27,12 @@ public class sdh_Bullet : MonoBehaviour
         if(collision.CompareTag("Enemy"))
         {
             Destroy(gameObject);
-            Debug.Log("ÀûÀ» ¶§¸²");
+            Debug.Log("ì ì„ ë•Œë¦¼");
         }
         if (collision.CompareTag("Shield"))
         {
             Destroy(gameObject);
-            Debug.Log("¹æÆĞ¿¡ ¸·Èû");
+            Debug.Log("ë°©íŒ¨ì— ë§‰í˜");
         }
     }
     private void OnBecameInvisible()

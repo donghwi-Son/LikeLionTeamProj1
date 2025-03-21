@@ -3,7 +3,7 @@ using UnityEngine;
 public class sdh_ShieldEnemy : MonoBehaviour
 {
     public float HP = 10;
-    Transform pt;   //ÇÃ·¹ÀÌ¾î transform
+    Transform pt;   //í”Œë ˆì´ì–´ transform
     float speed = 1f;
     float turnDelay = 0.1f;
     float nextCheckTime = 0;
@@ -23,23 +23,23 @@ public class sdh_ShieldEnemy : MonoBehaviour
         if (Time.time >= nextCheckTime)
         {
             CheckFlipX();
-            nextCheckTime = Time.time + turnDelay; // ´ÙÀ½ Ã¼Å© ½Ã°£ °»½Å
+            nextCheckTime = Time.time + turnDelay; // ë‹¤ìŒ ì²´í¬ ì‹œê°„ ê°±ì‹ 
         }
 
     }
 
     void CheckFlipX()
     {
-        if (transform.position.x < pt.position.x) // ÀûÀÌ ¿ŞÂÊ
+        if (transform.position.x < pt.position.x) // ì ì´ ì™¼ìª½
         {
-            if (Random.value > 0.5f) // 50% È®·ü·Î Çàµ¿
+            if (Random.value > 0.5f) // 50% í™•ë¥ ë¡œ í–‰ë™
             {
                 Invoke("TurnLeft", 0.5f);
             }
         }
         else
         {
-            if (Random.value > 0.5f) // 50% È®·ü·Î Çàµ¿
+            if (Random.value > 0.5f) // 50% í™•ë¥ ë¡œ í–‰ë™
             {
                 Invoke("TurnRight", 0.5f);
             }

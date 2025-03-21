@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class sdh_Gun : MonoBehaviour
 {
-    public GameObject bullet1; // ÃÑ¾Ë ÇÁ¸®ÆÕ
-    public GameObject bullet2; // ÃÑ¾Ë ÇÁ¸®ÆÕ
-    public GameObject bullet3; // ÃÑ¾Ë ÇÁ¸®ÆÕ
-    public Transform firePoint;    // ÃÑ¾Ë »ı¼º À§Ä¡
+    public GameObject bullet1; // ì´ì•Œ í”„ë¦¬íŒ¹
+    public GameObject bullet2; // ì´ì•Œ í”„ë¦¬íŒ¹
+    public GameObject bullet3; // ì´ì•Œ í”„ë¦¬íŒ¹
+    public Transform firePoint;    // ì´ì•Œ ìƒì„± ìœ„ì¹˜
 
     public Material FlashM;
     public Material DefaultM;
@@ -69,7 +69,7 @@ public class sdh_Gun : MonoBehaviour
 
     }
 
-    IEnumerator Flash() // 2¹ø ¹İÂ¦ÀÌ¸é Áß°ø°İ
+    IEnumerator Flash() // 2ë²ˆ ë°˜ì§ì´ë©´ ì¤‘ê³µê²©
     {
         while (true)
         {
@@ -83,13 +83,13 @@ public class sdh_Gun : MonoBehaviour
     private void RotateTowardsMouse(Vector3 wp)
     {
 
-        // ÇöÀç ¿ÀºêÁ§Æ® À§Ä¡¿¡¼­ ¸¶¿ì½º À§Ä¡·ÎÀÇ ¹æÇâ °è»ê
+        // í˜„ì¬ ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜ì—ì„œ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ë¡œì˜ ë°©í–¥ ê³„ì‚°
         Vector3 direction = wp - transform.position;
 
-        // ZÃà È¸ÀüÀ» À§ÇÑ °¢µµ °è»ê
+        // Zì¶• íšŒì „ì„ ìœ„í•œ ê°ë„ ê³„ì‚°
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // ÇöÀç ¿ÀºêÁ§Æ®ÀÇ È¸Àü ¼³Á¤
+        // í˜„ì¬ ì˜¤ë¸Œì íŠ¸ì˜ íšŒì „ ì„¤ì •
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
