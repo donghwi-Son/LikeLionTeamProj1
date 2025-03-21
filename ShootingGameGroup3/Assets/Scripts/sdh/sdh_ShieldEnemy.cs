@@ -3,12 +3,9 @@ using UnityEngine;
 public class sdh_ShieldEnemy : MonoBehaviour
 {
     public float HP = 10;
-<<<<<<< HEAD
+
     Transform pt;   //í”Œë ˆì´ì–´ transform
-=======
-    Transform pt;   //ÇÃ·¹ÀÌ¾î transform
     Rigidbody2D rb;
->>>>>>> SDH
     float speed = 1f;
     float turnDelay = 0.1f;
     float nextCheckTime = 0;

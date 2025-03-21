@@ -16,11 +16,8 @@ public class sdh_Player : MonoBehaviour
 
     void Start()
     {
-<<<<<<< HEAD
         // SpriteRenderer ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
-=======
         rb = GetComponent<Rigidbody2D>();
->>>>>>> SDH
         psr = GetComponent<SpriteRenderer>();
         gunsr = gunT.GetComponent<SpriteRenderer>();
     }
@@ -47,20 +44,15 @@ public class sdh_Player : MonoBehaviour
         {
             // ë§ˆìš°ìŠ¤ê°€ ì™¼ìª½ì¼ ë•Œ
             psr.flipX = true;
-<<<<<<< HEAD
             gunsr.flipY = true; // ì´ë„ ìˆ˜ì§ ë°˜ì „
             fp.localPosition = new Vector3(fp.localPosition.x, -Mathf.Abs(fp.localPosition.y), fp.localPosition.z);
  
-=======
->>>>>>> SDH
         }
         else
         {
             // ë§ˆìš°ìŠ¤ê°€ ì˜¤ë¥¸ìª½ì¼ ë•Œ
             psr.flipX = false;
-<<<<<<< HEAD
             gunsr.flipY = false; // ì´ ì›ë˜ ë°©í–¥
-=======
         }
     }
 
@@ -69,17 +61,16 @@ public class sdh_Player : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        // ¸¶¿ì½º À§Ä¡¿¡ µû¶ó Flip ¼³Á¤
+        // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Flip ï¿½ï¿½ï¿½ï¿½
         if (mousePosition.x < transform.position.x)
         {
-            gunsr.flipY = true; // ÃÑ ¼öÁ÷ ¹İÀü
+            gunsr.flipY = true; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             fp.localPosition = new Vector3(fp.localPosition.x, -Mathf.Abs(fp.localPosition.y), fp.localPosition.z);
 
         }
         else
         {
-            gunsr.flipY = false; // ÃÑ ¿ø·¡ ¹æÇâ
->>>>>>> SDH
+            gunsr.flipY = false; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             fp.localPosition = new Vector3(fp.localPosition.x, Mathf.Abs(fp.localPosition.y), fp.localPosition.z);
         }
     }
@@ -129,6 +120,6 @@ public class sdh_Player : MonoBehaviour
 
     void GetHit()
     {
-        //ÇÇ°İÃ³¸®
+        //ï¿½Ç°ï¿½Ã³ï¿½ï¿½
     }
 }
