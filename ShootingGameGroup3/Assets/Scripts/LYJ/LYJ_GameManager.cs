@@ -5,10 +5,8 @@ public class LYJ_GameManager : MonoBehaviour
     public static LYJ_GameManager Instance { get; private set; }
 
     #region Objects
-    [SerializeField]
-    public LYJ_Aiming Aim;
-    [SerializeField]
-    public LYJ_Player Player;
+    public LYJ_Aiming Aim ;
+    public LYJ_Player Player ;
     #endregion
 
 
