@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     #region Player Stats
     float moveSpeed;
+    [SerializeField]
+    GameObject currentWeapon;
     #endregion
 
     #region Player Actions
@@ -100,6 +102,12 @@ public class Player : MonoBehaviour
         isRolling = false;
         yield return rollingCooldown;
         readyToRoll = true;
+    }
+    
+    void Shoot()
+    {
+        if (!Input.GetMouseButtonDown(0)) { return; }
+        
     }
 
 }
