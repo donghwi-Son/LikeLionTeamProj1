@@ -4,8 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header ("Game Objects")]
     #region Objects
-    public Aim Aim ;
+    public MouseManager MouseManager ;
     public Player Player ;
     #endregion
 
