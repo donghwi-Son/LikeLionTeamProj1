@@ -361,7 +361,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      player_idle_to_run_4x2_0: -91934804176195301
+      player_idle_to_run_4x2_1: -38454092105213676
+      player_idle_to_run_4x2_2: 4164250219139547527
+      player_idle_to_run_4x2_3: 5719770430986859096
+      player_idle_to_run_4x2_4: -7182448880166635445
+      player_idle_to_run_4x2_5: 5595838870475583528
+      player_idle_to_run_4x2_6: 4727503017206007839
+      player_idle_to_run_4x2_7: -8721716940205725910
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

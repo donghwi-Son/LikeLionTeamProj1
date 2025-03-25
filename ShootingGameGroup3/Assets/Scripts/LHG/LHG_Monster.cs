@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class LHG_Monster : MonoBehaviour
 {
     public int health = 3;
     public GameObject MiniMonsterPrefab;
