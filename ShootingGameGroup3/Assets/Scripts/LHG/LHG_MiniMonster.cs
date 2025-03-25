@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MiniMonster : MonoBehaviour
+public class LHG_MiniMonster : MonoBehaviour
 {
     public int health = 3;
     public float moveSpeed = 1f; 
