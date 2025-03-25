@@ -1,17 +1,17 @@
 using System;
 using UnityEngine;
 
-public class LHG_Player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     private float speed;
 
-    // ï¿½ë½¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    public float dashDistance = 2f; // ï¿½ë½¬ ï¿½Å¸ï¿½
-    public float dashCooldown = 5f; // ï¿½ï¿½Å¸ï¿½ï¿½
-    private float lastDashTime; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë½¬ ï¿½Ã°ï¿½
+    // ´ë½¬ °ü·Ã º¯¼ö
+    public float dashDistance = 2f; // ´ë½¬ °Å¸®
+    public float dashCooldown = 5f; // ÄðÅ¸ÀÓ
+    private float lastDashTime; // ¸¶Áö¸· ´ë½¬ ½Ã°£
 
     void Update()
     {
@@ -34,7 +34,7 @@ public class LHG_Player : MonoBehaviour
             Shoot();
         }
 
-        // ï¿½ë½¬ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
+        // ´ë½¬ ÀÔ·Â Ã³¸®
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown)
         {
             Dash();
@@ -53,14 +53,14 @@ public class LHG_Player : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         Vector2 direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - bulletSpawnPoint.position).normalized;
-        bullet.GetComponent<LHG_Bullet>().SetDirection(direction);
+        bullet.GetComponent<Bullet>().SetDirection(direction);
     }
 
     void Dash()
     {
-        // ï¿½ë½¬ ï¿½Ìµï¿½
-        Vector2 dashDirection = new Vector2(transform.localScale.x, 0).normalized; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë½¬
+        // ´ë½¬ ÀÌµ¿
+        Vector2 dashDirection = new Vector2(transform.localScale.x, 0).normalized; // ÇöÀç ¹æÇâÀ¸·Î ´ë½¬
         transform.Translate(dashDirection * dashDistance, Space.World);
-        lastDashTime = Time.time; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë½¬ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+        lastDashTime = Time.time; // ¸¶Áö¸· ´ë½¬ ½Ã°£ ¾÷µ¥ÀÌÆ®
     }
 }

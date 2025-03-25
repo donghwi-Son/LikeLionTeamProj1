@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LHG_Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public float speed = 10f;
     public int damage = 1;
@@ -26,7 +26,7 @@ public class LHG_Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Monster"))
         {
-            LHG_Monster monster = collision.GetComponent<LHG_Monster>();
+            Monster monster = collision.GetComponent<Monster>();
             if (monster != null)
             {
                 monster.TakeDamage(damage);
@@ -36,7 +36,7 @@ public class LHG_Bullet : MonoBehaviour
         }
         else if (collision.CompareTag("MiniMonster"))
         {
-            LHG_MiniMonster miniMonster = collision.GetComponent<LHG_MiniMonster>();
+            MiniMonster miniMonster = collision.GetComponent<MiniMonster>();
             if (miniMonster != null)
             {
                 miniMonster.TakeDamage(damage);
