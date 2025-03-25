@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     void FlipPlayer()
     {
-        if (GameManager.Instance.Aim.GetMousePos().x < transform.position.x)
+        if (GameManager.Instance.MouseManager.GetMousePos().x < transform.position.x)
         {
             playerSpriteRenderer.flipX = true;
             // 무기 뒤집기는 따로 분리
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         Vector3 rollDir = new Vector3(inputVec.x, inputVec.y, 0).normalized;
         if (rollDir == Vector3.zero)
         {
-            Vector3 rollToMouseVec = GameManager.Instance.Aim.GetMousePos() - transform.position;
+            Vector3 rollToMouseVec = GameManager.Instance.MouseManager.GetMousePos() - transform.position;
             rollDir = new Vector3(rollToMouseVec.x, rollToMouseVec.y, 0).normalized;
         }
         rb.AddForce(rollDir * ROLLING_POWER, ForceMode2D.Impulse);
