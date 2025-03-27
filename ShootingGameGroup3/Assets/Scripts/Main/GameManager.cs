@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class LYJ_GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static LYJ_GameManager Instance { get; private set; }
+    public static GameManager Instance { get; private set; }
 
+    [Header ("Game Objects")]
     #region Objects
-    public LYJ_Aiming Aim ;
-    public LYJ_Player Player ;
+    public MouseManager MouseManager ;
+    public Player Player ;
     #endregion
 
 
