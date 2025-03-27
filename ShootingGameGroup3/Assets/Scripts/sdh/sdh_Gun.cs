@@ -30,7 +30,7 @@ public class sdh_Gun : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             chargetime += Time.deltaTime;
-            if(chargetime > 3)
+            if(chargetime > 2)
             {
                 if(flashRoutine != null)
                 {
