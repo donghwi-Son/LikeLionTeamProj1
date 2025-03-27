@@ -41,6 +41,15 @@ public class LYJ_WeaponManager : MonoBehaviour
         }
     }
 
+    public void ChargeSkill()
+    {
+        switch (currentWeaponName)
+        {
+            default:
+            break;
+        }
+    }
+
     public void ChangeBullet()
     {
         switch (currentWeaponName)
