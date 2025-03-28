@@ -49,7 +49,6 @@ public class LSM_Triump : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -59,15 +58,14 @@ public class LSM_Triump : MonoBehaviour
 
     private void Update()
     {
-        HandleShooting();
-        HandleSpadeDrawing();
         HandleJoker();
+        CheckSpadeStack();
     }
 
-    // 발사 처리 함수
-    private void HandleShooting()
+    // 왼쪽 클릭 - 발사
+    public void Triump_Left_Click()
     {
-        if (isReady && Input.GetMouseButtonDown(0))
+        if (isReady)
         {
             Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
@@ -75,6 +73,34 @@ public class LSM_Triump : MonoBehaviour
             FireBullet(currentShootType, targetPosition);
             isReady = false;
             StartCoroutine(ShootDelay());
+        }
+    }
+
+    // 오른쪽 클릭 - 드로우 카드 선택
+    public void Triump_Right_Click()
+    {
+        if (draw)
+        {
+            SetShootTypeBasedOnDraw();
+        }
+    }
+
+    // LeftShift - 드로우 카드 변경
+    public void Triump_Left_Shift()
+    {
+        if (draw)
+        {
+            CycleDrawType();
+        }
+    }
+
+    // 스페이드 스택 증가 체크
+    public void CheckSpadeStack()
+    {
+        if (spadeStack == 10)
+        {
+            draw = true;
+            spadeStack = 0;
         }
     }
 
@@ -179,24 +205,6 @@ public class LSM_Triump : MonoBehaviour
                 if (jokerStack < 3)
                     jokerStack++;
                 break;
-        }
-    }
-
-    // 스페이드 드로우 처리 함수
-    private void HandleSpadeDrawing()
-    {
-        if (spadeStack == 10)
-        {
-            draw = true;
-            spadeStack = 0;
-        }
-
-        if (draw)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                CycleDrawType();
-            if (Input.GetMouseButtonDown(1))
-                SetShootTypeBasedOnDraw();
         }
     }
 

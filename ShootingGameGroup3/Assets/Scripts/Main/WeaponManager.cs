@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    enum WeaponName { /*샷건, 라이플*/ };
+    enum WeaponName { /*Triump*/
+    }; // 추후 다른 총 완성 되면 추가 하겠습니다.
+
     List<GameObject> allWeapons;
     Queue<GameObject> selectableWeapons;
     WeaponName currentWeaponName;
@@ -25,10 +27,11 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
-            // case WeaponName.샷건:
+            // case Triump:
+            // LSM_Triump().Triump_Left_Click();
             // break;
             default:
-            break;
+                break;
         }
     }
 
@@ -36,8 +39,11 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
+            // case Triump:
+            // LSM_Triump().Triump_Right_Click();
+            // break;
             default:
-            break;
+                break;
         }
     }
 
@@ -46,7 +52,7 @@ public class WeaponManager : MonoBehaviour
         switch (currentWeaponName)
         {
             default:
-            break;
+                break;
         }
     }
 
@@ -54,9 +60,11 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
+            // case Triump:
+            // LSM_Triump().Triump_Left_Shift();
+            // break;
             default:
-            break;
+                break;
         }
     }
-
 }
