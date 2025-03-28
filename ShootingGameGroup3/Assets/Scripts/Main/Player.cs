@@ -103,11 +103,44 @@ public class Player : MonoBehaviour
         yield return rollingCooldown;
         readyToRoll = true;
     }
-    
+
     void Shoot()
     {
         if (!Input.GetMouseButtonDown(0)) { return; }
-        
+
     }
+    void Update()
+    {
+        ControlWeapon();
+    }
+
+    void ControlWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            GameManager.Instance.WeaponManager.ChangeBullet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            GameManager.Instance.WeaponManager.ChangeWeapon();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameManager.Instance.WeaponManager.NormalShoot();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            GameManager.Instance.WeaponManager.SpecialSkill();
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            GameManager.Instance.WeaponManager.ChargeSkill();
+        }
+    }
+
 
 }

@@ -45,14 +45,7 @@ public class LYJ_Enemy_Oil : MonoBehaviour
     {
         Vector2 nextVec = (target.position-transform.position).normalized * moveSpeed;
         _rb.linearVelocity = nextVec;
-        if (target.transform.position.x < transform.position.x)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
-        }
+        spriteRenderer.flipX = target.transform.position.x < transform.position.x;
     }
 
     IEnumerator DropOil()

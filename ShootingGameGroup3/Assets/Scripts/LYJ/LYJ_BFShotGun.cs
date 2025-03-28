@@ -20,7 +20,7 @@ public class LYJ_BFShotGun : MonoBehaviour
     const float FIRE_ANGLE = 15f; // temp
     [SerializeField]
     GameObject _bullet;
-    
+
     void Awake()
     {
         _readyToShoot = true;
@@ -37,7 +37,7 @@ public class LYJ_BFShotGun : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.FromToRotation(Vector3.right, LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position);
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position);
     }
 
     void Update()
@@ -55,12 +55,12 @@ public class LYJ_BFShotGun : MonoBehaviour
         Vector2 direction = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 이러면 굳이 X Y 따로 구할 필요 없음
 
-        
+
         for (int i = 0; i < MaxBullet; ++i)
         {
             GameObject currentBullet = Instantiate(_bullet, transform.position, Quaternion.identity);
 
-            float currentAngle = FIRE_ANGLE  / (MaxBullet - 1) * i - FIRE_ANGLE / 2.0f; // 균등한 각도
+            float currentAngle = FIRE_ANGLE / (MaxBullet - 1) * i - FIRE_ANGLE / 2.0f; // 균등한 각도
             float calculatedAngle = baseAngle + currentAngle;
             float bulletVecX = Mathf.Cos(calculatedAngle * Mathf.Deg2Rad);
             float bulletVecY = Mathf.Sin(calculatedAngle * Mathf.Deg2Rad);
@@ -71,9 +71,9 @@ public class LYJ_BFShotGun : MonoBehaviour
 
             Vector2 bulletVec = new Vector2(bulletVecX, bulletVecY).normalized;
 
-            
+
             currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/);
-            
+
             Destroy(currentBullet, 1f);
         }
         // Vector3 kickBack = -(GameManager.Instance.Aim.GetMousePos() - GameManager.Instance.Player.transform.position).normalized;
