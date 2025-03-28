@@ -41,6 +41,28 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
+            // case WeaponName.차지라이플:
+            // sdh_Gun.flashRoutineStart();
+            default:
+            break;
+        }
+    }
+
+    public void ChargeSkill() // mousebutton 1
+    {
+        switch (currentWeaponName)
+        {
+            // case WeaponName.차지라이플:
+            // sdh_Gun.Charging();
+            default:
+            break;
+        }
+    }
+
+    public void ChangeBullet() //left shift
+    {
+        switch (currentWeaponName)
+        {
             // case Triump:
             // LSM_Triump().Triump_Right_Click();
             // break;
