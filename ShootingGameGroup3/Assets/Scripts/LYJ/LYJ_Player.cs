@@ -50,8 +50,7 @@ public class LYJ_Player : MonoBehaviour
     //     }
     // }
 
-    #region 아직 메인으로 안 옮긴 부분
-    void Update()
+void Update()
     {
         ControlWeapon();
     }
@@ -85,6 +84,8 @@ public class LYJ_Player : MonoBehaviour
     }
 
 
+    #region 아직 메인으로 안 옮긴 부분
+    
     #endregion
 
 

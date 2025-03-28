@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     #region Objects
     public MouseManager MouseManager ;
     public Player Player ;
+    public WeaponManager WeaponManager;
     #endregion
 
 
