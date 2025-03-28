@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Jobs;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class sdh_ShieldEnemy : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
     bool isAtt = false;
     bool isDead = false;
     bool isHit = false;
+    bool startMV = false;
     public AudioClip hitSound;
     public AudioClip dieSound;
     public AudioClip AttSound;
@@ -45,7 +47,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && startMV)
         {
             if (!isAtt && !isHit)
             {
@@ -92,7 +94,10 @@ public class sdh_ShieldEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isAtt = false;
     }
-
+    public void StartMV()
+    {
+        startMV = true;
+    }
     void MoveRandom()
     {
         rb.linearVelocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed;
@@ -166,7 +171,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
     void Die()
     {
         mys.PlayOneShot(dieSound);
-        col.enabled = false;
+        col.isTrigger = true;
         isDead = true;
         anim.SetTrigger("Die");
         Invoke("Disappear", 1f);
