@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    enum WeaponName { /*샷건, 라이플, 차지라이플*/ };
+
+    enum WeaponName { /*샷건, 라이플, 차지라이플,Triump*/ };
     List<GameObject> allWeapons;
     Queue<GameObject> selectableWeapons;
     WeaponName currentWeaponName;
@@ -25,13 +26,14 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
-            // case WeaponName.샷건:
+            // case Triump:
+            // LSM_Triump().Triump_Left_Click();
             // break;
             // case WeaponName.차지라이플:
             // sdh_Gun.Shoot(GameManager.Instance.MouseManager.GetMousePos());
 
             default:
-            break;
+                break;
         }
     }
 
@@ -39,10 +41,14 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
+            // case Triump:
+            // LSM_Triump().Triump_Right_Click();
+            // break;
+            
             // case WeaponName.차지라이플:
             // sdh_Gun.flashRoutineStart();
             default:
-            break;
+                break;
         }
     }
 
@@ -53,7 +59,7 @@ public class WeaponManager : MonoBehaviour
             // case WeaponName.차지라이플:
             // sdh_Gun.Charging();
             default:
-            break;
+                break;
         }
     }
 
@@ -61,11 +67,13 @@ public class WeaponManager : MonoBehaviour
     {
         switch (currentWeaponName)
         {
+            // case Triump:
+            // LSM_Triump().Triump_Left_Shift();
+            // break;
             default:
-            break;
+                break;
         }
     }
-
     // mousebuttonup 1
     // case WeaponName.차지라이플:
     // sdh_Gun.ShootOut(GameManager.Instance.MouseManager.GetMousePos());
