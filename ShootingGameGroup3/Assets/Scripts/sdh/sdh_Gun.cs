@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class sdh_Gun : MonoBehaviour
 {
@@ -22,53 +23,74 @@ public class sdh_Gun : MonoBehaviour
         Vector3 mouseWP = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         RotateTowardsMouse(mouseWP);
 
-       if(Input.GetMouseButtonDown(0))
-        {
-            flashRoutine = StartCoroutine(Flash());
-        }
 
-        if (Input.GetMouseButton(0))
-        {
-            chargetime += Time.deltaTime;
-            if(chargetime > 2)
-            {
-                if(flashRoutine != null)
-                {
-                    StopCoroutine(flashRoutine);
-                    spr.material = FlashM;
-                }
-            }
 
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot(mouseWP);
         }
 
 
-
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(1))
         {
-            if (chargetime >= 2)
-            {
-                UltraStrongShoot(mouseWP);
-            }
-            else if (chargetime > 1)
-            {
-                StrongShoot(mouseWP);
-            }
-            
-            else
-            {
-                Shoot(mouseWP);
-            }
-            chargetime = 0;
-            if (flashRoutine != null)
-            {
-                StopCoroutine(flashRoutine);
-                spr.material = DefaultM;
-            }
+            flashRoutineStart();
+        }
+      
+
+        if (Input.GetMouseButton(1))
+        {
+            Charging();
+        }
+
+
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            ShootOut(mouseWP);
         }
         
 
     }
 
+    public void ShootOut(Vector3 mouseWP)
+    {
+        if (chargetime >= 2)
+        {
+            UltraStrongShoot(mouseWP);
+        }
+        else if (chargetime > 1)
+        {
+            StrongShoot(mouseWP);
+        }
+
+        else
+        {
+            Shoot(mouseWP);
+        }
+        chargetime = 0;
+        if (flashRoutine != null)
+        {
+            StopCoroutine(flashRoutine);
+            spr.material = DefaultM;
+        }
+    }
+    public void Charging()
+    {
+        chargetime += Time.deltaTime;
+        if (chargetime > 2)
+        {
+            if (flashRoutine != null)
+            {
+                StopCoroutine(flashRoutine);
+                spr.material = FlashM;
+            }
+        }
+    }
+    public void flashRoutineStart()
+    {
+        flashRoutine = StartCoroutine(Flash());
+    }
     IEnumerator Flash() // 2번 반짝이면 중공격
     {
         while (true)
@@ -94,7 +116,7 @@ public class sdh_Gun : MonoBehaviour
     }
 
 
-    void Shoot(Vector3 wP)
+    public void Shoot(Vector3 wP)
     {
         Instantiate(bullet1, firePoint.position, Quaternion.identity);
     }
