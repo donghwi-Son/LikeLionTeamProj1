@@ -27,4 +27,9 @@ public class LYJ_GameManager : MonoBehaviour
     {
         
     }
+
+    #region 아직 메인으로 안 옮긴 부분
+    public LYJ_WeaponManager WeaponManager;
+
+    #endregion
 }

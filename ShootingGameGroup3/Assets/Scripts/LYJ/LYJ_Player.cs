@@ -50,5 +50,42 @@ public class LYJ_Player : MonoBehaviour
     //     }
     // }
 
+    #region 아직 메인으로 안 옮긴 부분
+    void Update()
+    {
+        ControlWeapon();
+    }
+
+    void ControlWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            LYJ_GameManager.Instance.WeaponManager.ChangeBullet();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            LYJ_GameManager.Instance.WeaponManager.ChangeWeapon();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            LYJ_GameManager.Instance.WeaponManager.NormalShoot();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            LYJ_GameManager.Instance.WeaponManager.SpecialSkill();
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            LYJ_GameManager.Instance.WeaponManager.ChargeSkill();
+        }
+    }
+
+
+    #endregion
+
 
 }
