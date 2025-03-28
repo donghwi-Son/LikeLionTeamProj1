@@ -9,6 +9,8 @@ public class LYJ_WeaponManager : MonoBehaviour
     WeaponName currentWeaponName;
     GameObject currentWeapon;
 
+    float chargeTime;
+
     void SetSelectableWeapon()
     {
         // 스테이지별 가능한 웨펀 Enqueue
@@ -41,7 +43,7 @@ public class LYJ_WeaponManager : MonoBehaviour
         }
     }
 
-    public void ChargeSkill()
+    public void ChargeSkill() // 이거 구현 어떻게 할지 고민 좀더 해봐야함
     {
         switch (currentWeaponName)
         {

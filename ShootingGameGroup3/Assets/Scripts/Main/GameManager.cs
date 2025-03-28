@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     [Header ("Game Objects")]
     #region Objects
-    public MouseManager MouseManager ;
+    public MouseManager MouseManager;
     public Player Player ;
     public WeaponManager WeaponManager;
     #endregion

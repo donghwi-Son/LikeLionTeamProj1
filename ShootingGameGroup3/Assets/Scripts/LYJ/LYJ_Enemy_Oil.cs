@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LYJ_Enemy_Oil : MonoBehaviour
 {
+    const float FIRE_CHANCE = 0.1f;
     private float moveSpeed = 1.5f;
     Rigidbody2D _rb;
     WaitForSeconds oilDropInterval;
@@ -30,6 +31,13 @@ public class LYJ_Enemy_Oil : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet")) { return; }
+        RandomFire();
+        // hp --;
+    }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.CompareTag("Aggro")) {return;}
@@ -54,6 +62,14 @@ public class LYJ_Enemy_Oil : MonoBehaviour
         {
             yield return oilDropInterval;
             Instantiate(oil, transform.position, Quaternion.identity); // 나중에 오브젝트 풀링으로 수정 필요
+        }
+    }
+
+    void RandomFire()
+    {
+        if (Random.value <= FIRE_CHANCE)
+        {
+            // hp 지속딜 코루틴
         }
     }
 }
