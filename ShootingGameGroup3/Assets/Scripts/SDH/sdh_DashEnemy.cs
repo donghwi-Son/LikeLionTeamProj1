@@ -16,11 +16,12 @@ public class sdh_DashEnemy : MonoBehaviour
     public Material flashM;
     public Material defaultM;
 
-    float HP = 20f;
-    float speed = 2f;
+    float HP = 100f;
+    float speed = 4f;
     bool isattack = false;
     bool isDead = false;
     bool isHit = false;
+    bool startMV = false;
     float attdis = 3f;
 
     void Start()
@@ -39,16 +40,19 @@ public class sdh_DashEnemy : MonoBehaviour
 
     void Update()
     {
-        if (!isattack && !isDead)
+        if (startMV)
         {
-            if (!isHit)
+            if (!isattack && !isDead)
             {
-                MoveTowardPlayer();
-                CheckFlip();
-            }
-            if (Vector3.Distance(transform.position, pt.position) <= attdis)
-            {
-                Charge();
+                if (!isHit)
+                {
+                    MoveTowardPlayer();
+                    CheckFlip();
+                }
+                if (Vector3.Distance(transform.position, pt.position) <= attdis)
+                {
+                    Charge();
+                }
             }
         }
     }
@@ -80,6 +84,10 @@ public class sdh_DashEnemy : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
     }
 
+    public void StartMove()
+    {
+        startMV = true;
+    }
     void Die()
     {
         mys.PlayOneShot(dieSound);
@@ -130,7 +138,7 @@ public class sdh_DashEnemy : MonoBehaviour
         col.isTrigger = true;
         sr.material = defaultM;
         anim.SetTrigger("Att");
-        rb.AddForce(dir * 20, ForceMode2D.Impulse);
+        rb.AddForce(dir * 15, ForceMode2D.Impulse);
         StartCoroutine("cooldown");
     }
 
@@ -139,6 +147,7 @@ public class sdh_DashEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         col.isTrigger = false;
         rb.linearVelocity = Vector3.zero;
+        yield return new WaitForSeconds(0.5f);
         isattack = false;
     }
 

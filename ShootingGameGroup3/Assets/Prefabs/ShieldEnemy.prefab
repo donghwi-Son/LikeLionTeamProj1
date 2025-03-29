@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6380486786112499786}
   - component: {fileID: 4393230838530522891}
+  - component: {fileID: 5578014314727225182}
   m_Layer: 0
   m_Name: Att
   m_TagString: Untagged
@@ -62,7 +63,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -78,6 +79,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.7333121, y: 1.8937255}
   m_EdgeRadius: 0
+--- !u!114 &5578014314727225182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549706350136302084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d519375b6ffc7fc4daf56314586491cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7313977408148500487
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +106,7 @@ GameObject:
   - component: {fileID: 756563891124605818}
   - component: {fileID: 8116362986282929696}
   - component: {fileID: 5609359623050358105}
+  - component: {fileID: 5599594602872510226}
   m_Layer: 0
   m_Name: ShieldEnemy
   m_TagString: Enemy
@@ -243,11 +257,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4eb9469c0eb424eb13bfd8dc05c211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attCol: {fileID: 4393230838530522891}
   flashM: {fileID: 2100000, guid: 909f1e7f86eb6654a801eaacbb2217ba, type: 2}
   defaultM: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   hitSound: {fileID: 8300000, guid: edb5058aaff7a0e479826984e76ccc82, type: 3}
   dieSound: {fileID: 8300000, guid: cdd382e4f1c34254087c4286c878bf22, type: 3}
-  AttSound: {fileID: 0}
+  AttSound: {fileID: 8300000, guid: 9c6d6b350346ed6488653da2744107da, type: 3}
 --- !u!50 &8116362986282929696
 Rigidbody2D:
   serializedVersion: 5
@@ -372,6 +387,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5599594602872510226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7313977408148500487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4dea14f1dff468343a9f6175ee107209, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 756563891124605818}
+          m_TargetAssemblyTypeName: sdh_ShieldEnemy, Assembly-CSharp
+          m_MethodName: StartMV
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7887978730622328220
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Jobs;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class sdh_ShieldEnemy : MonoBehaviour
 {
@@ -9,11 +10,12 @@ public class sdh_ShieldEnemy : MonoBehaviour
     Animator anim;
     AudioSource mys;
     Collider2D col;
+    public Collider2D attCol;
     public Material flashM;
     public Material defaultM;
     SpriteRenderer sr;
 
-    float speed = 1f;
+    float speed = 3f;
     float turnDelay = 0.1f;
     float nextCheckTime = 0;
     float moveDelay = 1f;
@@ -22,6 +24,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
     bool isAtt = false;
     bool isDead = false;
     bool isHit = false;
+    bool startMV = false;
     public AudioClip hitSound;
     public AudioClip dieSound;
     public AudioClip AttSound;
@@ -45,7 +48,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (!isDead)
+        if (!isDead && startMV)
         {
             if (!isAtt && !isHit)
             {
@@ -73,7 +76,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(transform.position, pt.position) < 1f && !isAtt)
+            if (Vector3.Distance(transform.position, pt.position) < 1.5f && !isAtt)
             {
                 StartCoroutine(Att());
             }
@@ -88,11 +91,16 @@ public class sdh_ShieldEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         sr.material = defaultM;
         anim.SetTrigger("Att");
+        attCol.enabled = true;
         mys.PlayOneShot(AttSound);
         yield return new WaitForSeconds(0.5f);
+        attCol.enabled = false;
         isAtt = false;
     }
-
+    public void StartMV()
+    {
+        startMV = true;
+    }
     void MoveRandom()
     {
         rb.linearVelocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * speed;
