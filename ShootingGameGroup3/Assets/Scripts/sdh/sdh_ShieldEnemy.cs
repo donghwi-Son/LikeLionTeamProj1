@@ -10,11 +10,12 @@ public class sdh_ShieldEnemy : MonoBehaviour
     Animator anim;
     AudioSource mys;
     Collider2D col;
+    public Collider2D attCol;
     public Material flashM;
     public Material defaultM;
     SpriteRenderer sr;
 
-    float speed = 1f;
+    float speed = 3f;
     float turnDelay = 0.1f;
     float nextCheckTime = 0;
     float moveDelay = 1f;
@@ -75,7 +76,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(transform.position, pt.position) < 1f && !isAtt)
+            if (Vector3.Distance(transform.position, pt.position) < 1.5f && !isAtt)
             {
                 StartCoroutine(Att());
             }
@@ -90,8 +91,10 @@ public class sdh_ShieldEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         sr.material = defaultM;
         anim.SetTrigger("Att");
+        attCol.enabled = true;
         mys.PlayOneShot(AttSound);
         yield return new WaitForSeconds(0.5f);
+        attCol.enabled = false;
         isAtt = false;
     }
     public void StartMV()
@@ -171,7 +174,7 @@ public class sdh_ShieldEnemy : MonoBehaviour
     void Die()
     {
         mys.PlayOneShot(dieSound);
-        col.isTrigger = true;
+        col.enabled = false;
         isDead = true;
         anim.SetTrigger("Die");
         Invoke("Disappear", 1f);

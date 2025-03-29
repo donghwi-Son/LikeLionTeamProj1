@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3664088303413053645}
   - component: {fileID: 7946874331087458051}
   - component: {fileID: 360686256726340184}
+  - component: {fileID: 9188883825900529791}
   m_Layer: 0
   m_Name: sdh_DashEnemy
   m_TagString: Enemy
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -4881113513201803177, guid: 01e755983965c854397f98773ec7d7e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.7, y: 0.66}
@@ -292,3 +293,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9188883825900529791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022424775700094048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4dea14f1dff468343a9f6175ee107209, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2545365447823666734}
+          m_TargetAssemblyTypeName: sdh_DashEnemy, Assembly-CSharp
+          m_MethodName: StartMove
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
