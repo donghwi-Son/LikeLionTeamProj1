@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
+    #region Weapon Prefabs
     [Header("Weapon Prefabs")]
     [SerializeField]
     private GameObject ChargeRifle;
@@ -26,6 +27,8 @@ public class WeaponManager : MonoBehaviour
 
     [SerializeField]
     private GameObject MoneyGun;
+
+    #endregion
 
     [Header("References")]
     [SerializeField]
@@ -177,7 +180,7 @@ public class WeaponManager : MonoBehaviour
             currentWeaponName = WeaponName.머니건;
     }
 
-    #region Weapon Actions
+    #region Weapon Actions  
     public void NormalShoot() //mousebuttondown 0
     {
         switch (currentWeaponName)
