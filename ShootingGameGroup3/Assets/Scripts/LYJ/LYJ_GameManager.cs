@@ -24,13 +24,29 @@ public class LYJ_GameManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
+    
 
     #region 아직 메인으로 안 옮긴 부분
     
+    float currentStageTime;
+    public float CurrentStageTime => currentStageTime;
+    bool isTimeGoing;
+    void Update()
+    {
+        currentStageTime += Time.deltaTime;
+    }
+    
+    public void StopGame()
+    {
+        isTimeGoing = false;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        isTimeGoing = true;
+        Time.timeScale = 1;
+    }
 
     #endregion
 }

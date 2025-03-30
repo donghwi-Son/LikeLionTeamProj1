@@ -5,6 +5,7 @@ public class LYJ_WeaponManager : MonoBehaviour
 {
     enum WeaponName { /*샷건, 라이플*/ };
     List<GameObject> allWeapons;
+    public List<GameObject> AllWeapons => allWeapons;
     Queue<GameObject> selectableWeapons;
     WeaponName currentWeaponName;
     GameObject currentWeapon;

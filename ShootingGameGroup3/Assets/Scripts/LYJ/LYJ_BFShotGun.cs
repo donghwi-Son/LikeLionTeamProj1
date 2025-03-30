@@ -77,7 +77,7 @@ public class LYJ_BFShotGun : MonoBehaviour
             Destroy(currentBullet, 1f);
         }
         // Vector3 kickBack = -(GameManager.Instance.Aim.GetMousePos() - GameManager.Instance.Player.transform.position).normalized;
-        Vector3 kickBack = -(direction.normalized);
+        Vector3 kickBack = -direction.normalized;
         LYJ_GameManager.Instance.Player.KickBackRequest(kickBack, 20f/*temp*/);
         StartCoroutine(DelayFire());
     }
