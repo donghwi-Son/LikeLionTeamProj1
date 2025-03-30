@@ -9,10 +9,14 @@ public class Player : MonoBehaviour
     float ROLLING_POWER = 10f;
     float ROLLING_TIME = 0.2f;
     float ROLLING_COOLDOWN = 2.8f; // 구르는 시간과 합쳐서 3초
+    float MAX_HP = 3f;
     #endregion
 
     #region Player Stats
     float moveSpeed;
+    float hp;
+    float aas = 0;
+
     [SerializeField]
     GameObject currentWeapon;
     #endregion
@@ -36,6 +40,7 @@ public class Player : MonoBehaviour
         rollingTime = new WaitForSeconds(ROLLING_TIME);
         rollingCooldown = new WaitForSeconds(ROLLING_COOLDOWN);
         moveSpeed = MOVE_SPEED;
+        hp = MAX_HP;
         InitAllActions();
         rb = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,13 +53,19 @@ public class Player : MonoBehaviour
 
     void OnJump()
     {
-        if (isRolling || !readyToRoll) { return; }
+        if (isRolling || !readyToRoll)
+        {
+            return;
+        }
         StartCoroutine(Rolling());
     }
 
     void FixedUpdate()
     {
-        if (isRolling) {return;}
+        if (isRolling)
+        {
+            return;
+        }
         Move();
         FlipPlayer();
     }
@@ -93,7 +104,8 @@ public class Player : MonoBehaviour
         Vector3 rollDir = new Vector3(inputVec.x, inputVec.y, 0).normalized;
         if (rollDir == Vector3.zero)
         {
-            Vector3 rollToMouseVec = GameManager.Instance.MouseManager.GetMousePos() - transform.position;
+            Vector3 rollToMouseVec =
+                GameManager.Instance.MouseManager.GetMousePos() - transform.position;
             rollDir = new Vector3(rollToMouseVec.x, rollToMouseVec.y, 0).normalized;
         }
         rb.AddForce(rollDir * ROLLING_POWER, ForceMode2D.Impulse);
@@ -106,9 +118,12 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        if (!Input.GetMouseButtonDown(0)) { return; }
-
+        if (!Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
     }
+
     void Update()
     {
         ControlWeapon();
@@ -140,7 +155,37 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.WeaponManager.ChargeSkill();
         }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            GameManager.Instance.WeaponManager.ChargeSkillEnd();
+        }
     }
 
+    public void HPChange(float num)
+    {
+        hp += num;
+        if (hp <= 0)
+        {
+            hp = 0;
+        }
+        else if (hp >= MAX_HP)
+        {
+            hp = MAX_HP;
+        }
+    }
 
+    public void SpdChange(float num)
+    {
+        moveSpeed += num;
+        if (moveSpeed <= 1)
+        {
+            moveSpeed = 1;
+        }
+    }
+
+    public void AASChange(float num)
+    {
+        aas += num;
+    }
 }

@@ -4,22 +4,25 @@ public class LSM_Monster : MonoBehaviour
 {
     public Transform player;
     public SpriteRenderer spriteRenderer;
+    public Rigidbody2D rb;
 
     public int health = 100;
-    public int speed = 3;
+    public int move_speed = 3;
     public bool invincibility = false;
     public bool isSmells = false;
+    public bool isTracking = true;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        Death();
         Tracking();
+        Death();
     }
 
     public void SetInvincibility(bool state)
@@ -51,6 +54,9 @@ public class LSM_Monster : MonoBehaviour
 
     public void Tracking()
     {
+        if (!isTracking)
+            return;
+
         if (player == null)
             return;
 
@@ -79,8 +85,9 @@ public class LSM_Monster : MonoBehaviour
                 {
                     Vector3 direction = nearestMuffin.transform.position - transform.position;
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                    spriteRenderer.flipX = (direction.x > 0);
+                    //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+                    spriteRenderer.flipX = (direction.x < 0);
+                    rb.linearVelocity = direction.normalized * move_speed;
                 }
             }
         }
@@ -88,8 +95,28 @@ public class LSM_Monster : MonoBehaviour
         {
             Vector3 direction = player.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-            spriteRenderer.flipX = (direction.x > 0);
+            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            spriteRenderer.flipX = (direction.x < 0);
+            rb.linearVelocity = direction.normalized * move_speed;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // 충돌 시 몬스터의 속도를 0으로 설정
+            rb.linearVelocity = Vector2.zero;
+            Debug.Log("플레이어에게 피해를 주었습니다.");
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // 충돌 중에도 속도를 0으로 유지
+            rb.linearVelocity = Vector2.zero;
         }
     }
 }
