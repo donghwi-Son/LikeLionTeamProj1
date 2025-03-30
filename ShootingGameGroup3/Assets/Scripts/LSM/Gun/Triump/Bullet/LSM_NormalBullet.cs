@@ -37,9 +37,6 @@ public class LSM_NormalBullet : MonoBehaviour
         // 몬스터에게 데미지 적용
         monster.Damage(damage);
 
-        // 데미지 로그
-        Debug.Log($"데미지: {damage}");
-
         // 총알 삭제
         Destroy(gameObject);
     }
