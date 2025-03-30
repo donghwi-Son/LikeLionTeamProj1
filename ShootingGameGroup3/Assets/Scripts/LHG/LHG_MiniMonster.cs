@@ -5,7 +5,7 @@ public class LHG_MiniMonster : MonoBehaviour
     public int health = 3; // 적의 체력
     public float moveSpeed = 1f; // 적의 이동 속도
     private Transform player; // 플레이어의 Transform
-    public float chaseDistance = 7f; // 추적 거리
+    public float chaseDistance = 10f; // 추적 거리
 
     private void Start()
     {
