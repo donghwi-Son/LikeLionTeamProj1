@@ -6,6 +6,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
     const float FIRE_CHANCE = 0.1f;
     const float BURN_DAMAGE = 0.5f;
     const float BURN_DELAY = 0.5f;
+    float moneyChaseRange = 5f;
     float[] hpForWave = { 150, 200, 250, 300, 350 }; // temp
     float hp;
     private float moveSpeed = 1.5f;
@@ -42,15 +43,6 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         burnStack = 0;
     }
 
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Aggro")) {return;}
-        target = collision.transform;
-        if (target == null)
-        {
-            target = LYJ_GameManager.Instance.Player.transform;
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -82,14 +74,22 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    void UpdateTarget()
     {
-        if (!collision.CompareTag("Aggro")) {return;}
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, moneyChaseRange);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Money"))
+            {
+                target = hit.transform;
+                return;
+            }
+        }
         target = LYJ_GameManager.Instance.Player.transform;
     }
-
     void FixedUpdate()
     {
+        UpdateTarget();
         Vector2 nextVec = (target.position-transform.position).normalized * moveSpeed;
         _rb.linearVelocity = nextVec;
         spriteRenderer.flipX = target.transform.position.x < transform.position.x;

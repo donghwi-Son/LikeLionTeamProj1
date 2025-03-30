@@ -25,9 +25,9 @@ public class LYJ_BFShotGun : MonoBehaviour
     {
         _readyToShoot = true;
         // 이하 수치조정 필요, temp now
-        _damage = 5;
+        _damage = 7;
         _maxBullet = 7;
-        _attackDelay = new WaitForSeconds(2f);
+        _attackDelay = new WaitForSeconds(1.5f);
     }
 
     void OnEnable()

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LYJ_NormalEnemy : MonoBehaviour
 {
+    float moneyChaseRange = 5f;
     float[] hpForWave = { 100, 150, 200, 250, 300 }; // temp
     float hp;
     float moveSpeed = 1.5f;
@@ -28,15 +29,6 @@ public class LYJ_NormalEnemy : MonoBehaviour
         isHitWithOil = false;
     }
 
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Aggro")) { return; }
-        target = collision.transform;
-        if (target == null)
-        {
-            target = LYJ_GameManager.Instance.Player.transform;
-        }
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -65,14 +57,23 @@ public class LYJ_NormalEnemy : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+
+    void UpdateTarget()
     {
-        if (!collision.CompareTag("Aggro")) {return;}
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, moneyChaseRange);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Money"))
+            {
+                target = hit.transform;
+                return;
+            }
+        }
         target = LYJ_GameManager.Instance.Player.transform;
     }
-
     void FixedUpdate()
     {
+        UpdateTarget();
         Vector2 nextVec = (target.position-transform.position).normalized * moveSpeed;
         _rb.linearVelocity = nextVec;
         spriteRenderer.flipX = target.transform.position.x < transform.position.x;

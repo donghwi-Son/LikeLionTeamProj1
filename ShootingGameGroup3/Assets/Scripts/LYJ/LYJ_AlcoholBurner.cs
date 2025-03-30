@@ -7,14 +7,6 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     private float _damage;
     public float Damage => _damage;
 
-    private bool _readyToShoot;
-    public bool ReadyToShoot => _readyToShoot;
-
-    private int _maxBullet;
-    public int MaxBullet => _maxBullet;
-
-    private WaitForSeconds _attackDelay;
-    public WaitForSeconds AttackDelay => _attackDelay;
     #endregion
 
     WaitForSeconds rotationTerm;
@@ -37,6 +29,7 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     {
         StartCoroutine(RotateRandom());
         moveSpeed = 3f;
+        _damage = 4f;
         targetVec = LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position;
     }
 
@@ -71,7 +64,7 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (!gameObject.activeSelf) { return; }
-        if (!collision.CompareTag("Enemy")) { return; }
+        if (!collision.CompareTag("Monster")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
         LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
     }

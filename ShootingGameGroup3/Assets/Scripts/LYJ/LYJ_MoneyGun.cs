@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LYJ_MoneyGun : MonoBehaviour
@@ -9,71 +10,43 @@ public class LYJ_MoneyGun : MonoBehaviour
     private bool _readyToShoot;
     public bool ReadyToShoot => _readyToShoot;
 
-    private int _maxBullet;
-    public int MaxBullet => _maxBullet;
-
     private WaitForSeconds _attackDelay;
     public WaitForSeconds AttackDelay => _attackDelay;
     #endregion
-    
-    bool isMoneyMode;
     [SerializeField]
     GameObject money;
     [SerializeField]
-    GameObject bullet; // 게임매니저에 추가?
+    GameObject bullet;
 
-    SpriteRenderer spriteRenderer;
     void Awake()
     {
-        isMoneyMode = false;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _readyToShoot = true;
+        _damage = 1.5f;
+        _attackDelay = new WaitForSeconds(0.3f);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            isMoneyMode = !isMoneyMode;
-            switch (isMoneyMode)
-            {
-                case true:
-                    spriteRenderer.color = Color.red;
-                    break;
-                case false:
-                    spriteRenderer.color = Color.blue;
-                    break;
-            }
-        }
-    }
 
-    void Fire()
-    {
-        switch(isMoneyMode)
-        {
-            case true:
-                FireBuck();
-                break;
-            case false:
-                FireCoin();
-                break;
-        }
-    }
-
-    void FireBuck()
+    public void FireBuck()
     {
         Vector2 directionVec = LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position;
         GameObject currentMoney = Instantiate(money, transform.position, Quaternion.identity);
         currentMoney.GetComponent<LYJ_Money>().ShootMoney(directionVec, 3f/*temp*/);
     }
 
-    void FireCoin()
+    public void FireCoin()
     {
         Vector2 directionVec = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
         GameObject currentBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(directionVec, 10f/*temp*/, _damage);
+        StartCoroutine(DelayFire());
+    }
+
+
+
+    IEnumerator DelayFire()
+    {
+        _readyToShoot = false;
+        yield return AttackDelay;
+        _readyToShoot = true;
     }
 }
