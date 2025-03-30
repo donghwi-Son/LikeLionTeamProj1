@@ -3,10 +3,11 @@ using UnityEngine;
 
 public class LYJ_SpawnManager : MonoBehaviour
 {
+    [SerializeField]
     List<GameObject> enemies;
     List<Transform> spawnPoints;
-    float waveInterval;
-    int currentWave;
+    float waveInterval = 30f;
+    int currentWave = 1;
     public int CurrentWave => currentWave;
 
     void Awake()
@@ -15,18 +16,23 @@ public class LYJ_SpawnManager : MonoBehaviour
         {
             LYJ_PoolManager.Instance.CreatePool(item, 10);
         }
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            spawnPoints.Add(transform.GetChild(i));
+        }
     }
     void Update()
     {
-        if (LYJ_GameManager.Instance.CurrentStageTime >= waveInterval)
+        if (currentWave > 5) { return; }
+        if (LYJ_GameManager.Instance.CurrentStageTime % waveInterval == 0)
         {
-            StartWave();
+            StartNewWave();
         }
     }
 
-    void StartWave()
+    void StartNewWave()
     {
-        for (int i = 0; i < 5+currentWave; ++i)
+        for (int i = 0; i < 5+(3*currentWave); ++i)
         {
             int randomPointNo = Random.Range(0, spawnPoints.Count);
             GameObject enemy = LYJ_PoolManager.Instance.GetGameObject(enemies[i]);
