@@ -61,7 +61,7 @@ public class WeaponManager : MonoBehaviour
     private LSM_Triump triumpScript;
     private LSM_Muffin muffinScript;
     private LYJ_BFShotGun bfShotGunScript;
-    private LYJ_AlcoholBurner alcoholBurnerScript;
+    private LYJ_AlcoholBurnerHand alcoholBurnerScript;
     private LYJ_MoneyGun moneyGunScript;
 
     //private LHG_Bounce_Gun bounceGunScript;
@@ -160,7 +160,7 @@ public class WeaponManager : MonoBehaviour
         triumpScript = currentWeapon.GetComponent<LSM_Triump>();
         muffinScript = currentWeapon.GetComponent<LSM_Muffin>();
         bfShotGunScript = currentWeapon.GetComponent<LYJ_BFShotGun>();
-        alcoholBurnerScript = currentWeapon.GetComponent<LYJ_AlcoholBurner>();
+        alcoholBurnerScript = currentWeapon.GetComponent<LYJ_AlcoholBurnerHand>();
         moneyGunScript = currentWeapon.GetComponent<LYJ_MoneyGun>();
     }
 
@@ -203,7 +203,7 @@ public class WeaponManager : MonoBehaviour
                 bfShotGunScript.Fire();
                 break;
             case WeaponName.알코올램프:
-                //alcoholBurnerScript.ThrowBurner();
+                alcoholBurnerScript.ThrowBurner();
                 break;
             case WeaponName.머니건:
                 //moneyGunScript.FireCoin();
