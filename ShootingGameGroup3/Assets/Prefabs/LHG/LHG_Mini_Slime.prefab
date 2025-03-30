@@ -128,6 +128,7 @@ MonoBehaviour:
   health: 3
   moveSpeed: 1
   chaseDistance: 10
+  deathSound: {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}
 --- !u!61 &8060482834407040764
 BoxCollider2D:
   m_ObjectHideFlags: 0

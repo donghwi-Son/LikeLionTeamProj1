@@ -203,3 +203,4 @@ MonoBehaviour:
   numberOfMiniMonster: 3
   moveSpeed: 1
   chaseDistance: 10
+  deathSound: {fileID: 8300000, guid: ac6034ade498bb94b87620cdf6eac48b, type: 3}

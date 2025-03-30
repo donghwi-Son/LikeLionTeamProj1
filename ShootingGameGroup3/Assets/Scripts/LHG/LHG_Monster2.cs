@@ -15,6 +15,9 @@ public class LHG_Monster2 : MonoBehaviour
     private SpriteRenderer spriteRenderer; // 스프라이트 렌더러
     private Color originalColor; // 원래 색상
 
+    public AudioClip deathSound; // 몬스터 죽을 때 재생할 사운드 클립
+    private AudioSource audioSource; // AudioSource 컴포넌트
+
     private void Start()
     {
         // 플레이어의 Transform을 찾고 랜덤 방향을 설정
@@ -113,5 +116,11 @@ public class LHG_Monster2 : MonoBehaviour
         spriteRenderer.color = originalColor; // 원래 색상으로 복원
     }
 
-    
+    private void PlayDeathSound()
+    {
+        if (deathSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(deathSound); // 죽을 때 사운드 재생
+        }
+    }
 }

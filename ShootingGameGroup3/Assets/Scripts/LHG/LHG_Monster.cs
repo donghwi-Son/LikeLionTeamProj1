@@ -18,6 +18,9 @@ public class LHG_Monster : MonoBehaviour
     private SpriteRenderer spriteRenderer; // 스프라이트 렌더러
     private Color originalColor; // 원래 색상
 
+    public AudioClip deathSound; // 몬스터 죽을 때 재생할 사운드 클립
+    private AudioSource audioSource; // AudioSource 컴포넌트
+
     private void Start()
     {
         // 태그가 "Player"인 게임 오브젝트를 찾아서 player 변수에 할당
@@ -27,6 +30,9 @@ public class LHG_Monster : MonoBehaviour
         // 스프라이트 렌더러와 원래 색상 저장
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
+
+        // AudioSource 컴포넌트 가져오기
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -98,6 +104,7 @@ public class LHG_Monster : MonoBehaviour
         {
             // 체력이 0 이하가 되면 미니 몬스터로 분리
             SplitIntoMiniMonster();
+            PlayDeathSound(); // 죽을 때 사운드 재생
             Destroy(gameObject); // 몬스터 오브젝트 파괴
         }
         else
@@ -128,6 +135,14 @@ public class LHG_Monster : MonoBehaviour
             // 랜덤한 위치에 미니 몬스터 생성
             Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(MiniMonsterPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
+
+    private void PlayDeathSound()
+    {
+        if (deathSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(deathSound); // 죽을 때 사운드 재생
         }
     }
 }
