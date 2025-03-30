@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Shield
   - Bullet
+  - Muffin
+  - SpecialBullet
   layers:
   - Default
   - TransparentFX
