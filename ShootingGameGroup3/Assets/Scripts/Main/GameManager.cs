@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour
         {
             LoadNextScene();
         }
+        // 'K' 키를 눌렀을 때 씬 클리어 호출
+        if (Input.GetKeyDown(KeyCode.K)) // 'K' 키 사용
+        {
+            ClearScene();
+        }
     }
 
     // 외부에서 씬 클리어를 호출할 때 사용
