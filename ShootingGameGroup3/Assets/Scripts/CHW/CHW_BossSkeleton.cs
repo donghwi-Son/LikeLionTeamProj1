@@ -18,7 +18,8 @@ public class BossSkeleton : MonoBehaviour
     Animator eAnimator;
     public GameObject bonePrefab;
     public GameObject portalPrefab;
-
+    public AudioClip chw_throwBone;     // 뼈를 던질 때 재생할 사운드 클립 
+    public AudioClip chw_dieSkeleton;   // 사망 사운드
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -80,6 +81,7 @@ public class BossSkeleton : MonoBehaviour
         }
         // 보스 오브젝트 제거
         Destroy(gameObject);
+        AudioSource.PlayClipAtPoint(chw_dieSkeleton, transform.position);
     }
 
     void ShootBone()
@@ -102,6 +104,7 @@ public class BossSkeleton : MonoBehaviour
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bone.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        AudioSource.PlayClipAtPoint(chw_throwBone, transform.position);
     }
 
 

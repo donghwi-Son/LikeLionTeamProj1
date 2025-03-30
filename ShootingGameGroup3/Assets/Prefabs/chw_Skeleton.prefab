@@ -130,6 +130,8 @@ MonoBehaviour:
   detectionRange: 4
   boneSpeed: 5
   fireRate: 2
+  chw_throwBone: {fileID: 8300000, guid: 6d8f107ba870edf4e937c33751ea1f3b, type: 3}
+  chw_dieSkeleton: {fileID: 8300000, guid: 7ed45411e86e6c84e9de1fa66f6a02b5, type: 3}
   bonePrefab: {fileID: 842327516658184094, guid: d52b979155ec7954fa93a973c6d43c79, type: 3}
 --- !u!61 &7840837135695742905
 BoxCollider2D:
