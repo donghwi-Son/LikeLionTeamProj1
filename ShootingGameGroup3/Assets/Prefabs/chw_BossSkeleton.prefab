@@ -127,10 +127,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   moveSpeed: 1
-  detectionRange: 5
-  boneSpeed: 10
+  detectionRange: 4
+  boneSpeed: 6
   fireRate: 2
   bonePrefab: {fileID: 842327516658184094, guid: d52b979155ec7954fa93a973c6d43c79, type: 3}
+  portalPrefab: {fileID: 6340213357104742359, guid: 993c5d66da99ea14fbfa54f50037c3ca, type: 3}
+  chw_throwBone: {fileID: 8300000, guid: 6d8f107ba870edf4e937c33751ea1f3b, type: 3}
+  chw_dieSkeleton: {fileID: 8300000, guid: 7ed45411e86e6c84e9de1fa66f6a02b5, type: 3}
 --- !u!61 &3967140864439970520
 BoxCollider2D:
   m_ObjectHideFlags: 0
