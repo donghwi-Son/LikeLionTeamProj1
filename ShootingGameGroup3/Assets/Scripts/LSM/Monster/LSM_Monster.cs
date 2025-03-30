@@ -107,7 +107,8 @@ public class LSM_Monster : MonoBehaviour
         {
             // 충돌 시 몬스터의 속도를 0으로 설정
             rb.linearVelocity = Vector2.zero;
-            Debug.Log("플레이어에게 피해를 주었습니다.");
+            GameManager.Instance.Player.HPChange(-1f);
+            //Debug.Log("플레이어에게 피해를 주었습니다.");
         }
     }
 
