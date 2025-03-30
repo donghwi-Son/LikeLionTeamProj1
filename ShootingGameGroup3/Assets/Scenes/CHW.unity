@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonPrefab: {fileID: 1153718623543920735, guid: 24dd06b92eaa13a46b98edd95141a638, type: 3}
-  bossSkeletonPrefab: {fileID: 1153718623543920735, guid: 24dd06b92eaa13a46b98edd95141a638, type: 3}
+  bossSkeletonPrefab: {fileID: 997254320451507963, guid: dfab3a58c5896ed41815cdbfbc72eae0, type: 3}
 --- !u!1 &295067110
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -377,6 +377,14 @@ MonoBehaviour:
   MouseManager: {fileID: 385466074}
   Player: {fileID: 0}
   WeaponManager: {fileID: 108578222}
+  isSceneCleared: 0
+  sceneOrder:
+  - MainScene
+  - CHW
+  - LHG
+  - LSM
+  - LYJ
+  - SDH
 --- !u!4 &470418724
 Transform:
   m_ObjectHideFlags: 0

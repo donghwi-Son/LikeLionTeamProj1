@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -462967937057517784}
   - component: {fileID: -5531424115376119361}
   m_Layer: 0
-  m_Name: chw_bonePrefab
+  m_Name: chw_Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
