@@ -14,6 +14,8 @@ public class LSM_Triump : MonoBehaviour
     public Transform pos = null;
 
     private bool isReady = true;
+    private bool isCooldown = false;
+    private float remainingCooldown = 0f;
     private bool draw = false;
     public bool loyalty = false;
     public bool fatal = false;
@@ -49,7 +51,6 @@ public class LSM_Triump : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -59,22 +60,72 @@ public class LSM_Triump : MonoBehaviour
 
     private void Update()
     {
-        HandleShooting();
-        HandleSpadeDrawing();
+        if (isCooldown)
+        {
+            remainingCooldown -= Time.deltaTime;
+            if (remainingCooldown <= 0f)
+            {
+                isCooldown = false;
+                isReady = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Triump_Left_Shift();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Triump_Left_Click();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Triump_Right_Click();
+        }
         HandleJoker();
+        CheckSpadeStack();
     }
 
-    // 발사 처리 함수
-    private void HandleShooting()
+    // 왼쪽 클릭 - 발사
+    public void Triump_Left_Click()
     {
-        if (isReady && Input.GetMouseButtonDown(0))
+        if (isReady)
         {
             Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPosition.z = 0;
 
             FireBullet(currentShootType, targetPosition);
             isReady = false;
-            StartCoroutine(ShootDelay());
+            isCooldown = true;
+            remainingCooldown = shoot_delay;
+        }
+    }
+
+    // 오른쪽 클릭 - 드로우 카드 선택
+    public void Triump_Right_Click()
+    {
+        if (draw)
+        {
+            SetShootTypeBasedOnDraw();
+        }
+    }
+
+    // LeftShift - 드로우 카드 변경
+    public void Triump_Left_Shift()
+    {
+        if (draw)
+        {
+            CycleDrawType();
+        }
+    }
+
+    // 스페이드 스택 증가 체크
+    public void CheckSpadeStack()
+    {
+        if (spadeStack == 10)
+        {
+            draw = true;
+            spadeStack = 0;
         }
     }
 
@@ -182,24 +233,6 @@ public class LSM_Triump : MonoBehaviour
         }
     }
 
-    // 스페이드 드로우 처리 함수
-    private void HandleSpadeDrawing()
-    {
-        if (spadeStack == 10)
-        {
-            draw = true;
-            spadeStack = 0;
-        }
-
-        if (draw)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-                CycleDrawType();
-            if (Input.GetMouseButtonDown(1))
-                SetShootTypeBasedOnDraw();
-        }
-    }
-
     // 드로우 타입을 순차적으로 변경하는 함수
     private void CycleDrawType()
     {
@@ -227,15 +260,11 @@ public class LSM_Triump : MonoBehaviour
         {
             loyalty_remain--;
             if (loyalty_remain == 0)
-                StartCoroutine(ResetLoyalty());
+            {
+                loyalty = false;
+                loyalty_remain = 3; // 초기화
+            }
         }
-    }
-
-    private IEnumerator ResetLoyalty()
-    {
-        yield return new WaitForEndOfFrame();
-        loyalty = false;
-        loyalty_remain = 3;
     }
 
     // 조커 드로우 처리 함수
@@ -291,12 +320,5 @@ public class LSM_Triump : MonoBehaviour
                 fatal_remain = 1; // 초기화
             }
         }
-    }
-
-    // 발사 후 대기 시간 처리
-    private IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(shoot_delay);
-        isReady = true;
     }
 }

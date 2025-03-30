@@ -26,8 +26,18 @@ public class sdh_Bullet : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-            Debug.Log("적을 때림");
+            Destroy(gameObject); 
+            sdh_ShieldEnemy shieldEnemy = collision.gameObject.GetComponent<sdh_ShieldEnemy>();
+            if (shieldEnemy != null)
+            {
+                shieldEnemy.GetDmg(dmg);
+            }
+
+            sdh_DashEnemy dashEnemy = collision.gameObject.GetComponent<sdh_DashEnemy>();
+            if (dashEnemy != null)
+            {
+                dashEnemy.GetDmg(dmg); 
+            }
         }
         if (collision.CompareTag("Shield"))
         {

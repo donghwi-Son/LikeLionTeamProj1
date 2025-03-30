@@ -33,7 +33,6 @@ public class LSM_JackBullet : MonoBehaviour
         if (monster != null)
         {
             monster.Damage(damage);
-            Debug.Log($"데미지: {damage}");
         }
 
         // 총알 삭제

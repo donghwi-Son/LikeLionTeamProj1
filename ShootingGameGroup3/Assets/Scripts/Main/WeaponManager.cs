@@ -1,62 +1,258 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    enum WeaponName { /*샷건, 라이플*/ };
-    List<GameObject> allWeapons;
-    Queue<GameObject> selectableWeapons;
-    WeaponName currentWeaponName;
-    GameObject currentWeapon;
+    #region Weapon Prefabs
+    [Header("Weapon Prefabs")]
+    [SerializeField]
+    private GameObject ChargeRifle;
 
-    void SetSelectableWeapon()
+    [SerializeField]
+    private GameObject Boomerang;
+
+    [SerializeField]
+    private GameObject Triump;
+
+    [SerializeField]
+    private GameObject Muffin;
+
+    [SerializeField]
+    private GameObject BFShotGun;
+
+    [SerializeField]
+    private GameObject AlcoholBurner;
+
+    [SerializeField]
+    private GameObject MoneyGun;
+
+    #endregion
+
+    [Header("References")]
+    [SerializeField]
+    private Transform gunPos;
+
+    private enum WeaponName
     {
-        // 스테이지별 가능한 웨펀 Enqueue
-        ChangeWeapon(); // 최초 무기 할당
+        차지라이플,
+        부메랑,
+        트라이엄프,
+        머핀,
+        무거운총,
+        알코올램프,
+        머니건
+    }
+
+    private List<GameObject> weaponList;
+    private Queue<GameObject> weaponQue;
+    private WeaponName currentWeaponName;
+    private GameObject currentWeapon;
+    private Vector3 mousePos;
+
+    // 무기 스크립트 캐싱
+    private sdh_Gun chargeRifleScript;
+
+    //private BoomerangShooter boomerangScript;
+    private LSM_Triump triumpScript;
+    private LSM_Muffin muffinScript;
+    private LYJ_BFShotGun bfShotGunScript;
+    private LYJ_AlcoholBurner alcoholBurnerScript;
+    private LYJ_MoneyGun moneyGunScript;
+
+    void Start()
+    {
+        InitializeWeapons();
+        mousePos = GameManager.Instance.MouseManager.GetMousePos();
+    }
+
+    private void InitializeWeapons()
+    {
+        int currentStage = GameManager.Instance.stage;
+        weaponQue = new Queue<GameObject>();
+        weaponList = GetStageWeapons(currentStage);
+        SetSelectableWeapon();
+    }
+
+    private List<GameObject> GetStageWeapons(int stage)
+    {
+        return stage switch
+        {
+            1 => new List<GameObject> { ChargeRifle },
+            2 => new List<GameObject> { Boomerang },
+            3 => new List<GameObject> { Triump, Muffin },
+            4 => new List<GameObject> { BFShotGun, AlcoholBurner, MoneyGun },
+            5
+                => new List<GameObject>
+                { /* 한규님 무기 목록 */
+                },
+            _ => new List<GameObject>()
+        };
+    }
+
+    private void SetSelectableWeapon()
+    {
+        ClearWeapons();
+
+        foreach (GameObject weapon in weaponList)
+        {
+            GameObject newWeapon = Instantiate(weapon, gunPos.position, gunPos.rotation, gunPos);
+            // 게임오브젝트는 활성화 상태로 유지
+            newWeapon.SetActive(true);
+
+            // 첫 번째 무기를 제외한 나머지의 스프라이트만 비활성화
+            if (weaponQue.Count > 0)
+            {
+                newWeapon.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            weaponQue.Enqueue(newWeapon);
+        }
+
+        if (weaponQue.Count > 0)
+        {
+            ChangeWeapon();
+        }
+    }
+
+    private void ClearWeapons()
+    {
+        if (currentWeapon != null)
+            Destroy(currentWeapon);
+
+        foreach (var weapon in weaponQue)
+        {
+            if (weapon != null)
+                Destroy(weapon);
+        }
+        weaponQue.Clear();
+    }
+
+    public void UpdateWeapons(int stageNumber)
+    {
+        weaponList = GetStageWeapons(stageNumber);
+        SetSelectableWeapon();
     }
 
     public void ChangeWeapon()
     {
-        currentWeapon = selectableWeapons.Dequeue();
-        selectableWeapons.Enqueue(currentWeapon);
+        if (currentWeapon != null)
+        {
+            // 이전 무기의 스프라이트만 숨김
+            currentWeapon.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        currentWeapon = weaponQue.Dequeue();
+        // 새 무기의 스프라이트만 표시
+        currentWeapon.GetComponent<SpriteRenderer>().enabled = true;
+        weaponQue.Enqueue(currentWeapon);
+
+        UpdateWeaponScripts();
+        SetCurrentWeaponName();
     }
 
-    public void NormalShoot()
+    private void UpdateWeaponScripts()
+    {
+        chargeRifleScript = currentWeapon.GetComponent<sdh_Gun>();
+        //boomerangScript = currentWeapon.GetComponent<BoomerangShooter>();
+        triumpScript = currentWeapon.GetComponent<LSM_Triump>();
+        muffinScript = currentWeapon.GetComponent<LSM_Muffin>();
+        bfShotGunScript = currentWeapon.GetComponent<LYJ_BFShotGun>();
+        alcoholBurnerScript = currentWeapon.GetComponent<LYJ_AlcoholBurner>();
+        moneyGunScript = currentWeapon.GetComponent<LYJ_MoneyGun>();
+    }
+
+    private void SetCurrentWeaponName()
+    {
+        if (chargeRifleScript != null)
+            currentWeaponName = WeaponName.차지라이플;
+        //else if (boomerangScript != null)
+        //currentWeaponName = WeaponName.부메랑;
+        else if (triumpScript != null)
+            currentWeaponName = WeaponName.트라이엄프;
+        else if (muffinScript != null)
+            currentWeaponName = WeaponName.머핀;
+        else if (bfShotGunScript != null)
+            currentWeaponName = WeaponName.무거운총;
+        else if (alcoholBurnerScript != null)
+            currentWeaponName = WeaponName.알코올램프;
+        else if (moneyGunScript != null)
+            currentWeaponName = WeaponName.머니건;
+    }
+
+    #region Weapon Actions  
+    public void NormalShoot() //mousebuttondown 0
     {
         switch (currentWeaponName)
         {
-            // case WeaponName.샷건:
-            // break;
-            default:
-            break;
+            case WeaponName.차지라이플:
+                chargeRifleScript.Shoot(mousePos);
+                break;
+            case WeaponName.부메랑:
+                //ThrowBoomerang();
+                break;
+            case WeaponName.트라이엄프:
+                triumpScript.Triump_Left_Click();
+                break;
+            case WeaponName.머핀:
+                muffinScript.Shoot();
+                break;
+            case WeaponName.무거운총:
+                bfShotGunScript.Fire();
+                break;
+            case WeaponName.알코올램프:
+                //alcoholBurnerScript.ThrowBurner();
+                break;
+            case WeaponName.머니건:
+                //moneyGunScript.FireCoin();
+                break;
         }
     }
 
-    public void SpecialSkill()
+    public void SpecialSkill() //mousebuttondown 1
     {
         switch (currentWeaponName)
         {
-            default:
-            break;
+            case WeaponName.차지라이플:
+                chargeRifleScript.flashRoutineStart();
+                break;
+            case WeaponName.트라이엄프:
+                triumpScript.Triump_Right_Click();
+                break;
+            case WeaponName.머니건:
+                //moneyGunScript.FireBuck();
+                break;
         }
     }
 
-    public void ChargeSkill()
+    public void ChargeSkill() // mousebutton 1
     {
         switch (currentWeaponName)
         {
-            default:
-            break;
+            case WeaponName.차지라이플:
+                chargeRifleScript.Charging();
+                break;
         }
     }
 
-    public void ChangeBullet()
+    public void ChargeSkillEnd() // mousebutton up 1
     {
         switch (currentWeaponName)
         {
-            default:
-            break;
+            case WeaponName.차지라이플:
+                chargeRifleScript.ShootOut(mousePos);
+                break;
         }
     }
 
+    public void ChangeBullet() //left shift
+    {
+        switch (currentWeaponName)
+        {
+            case WeaponName.트라이엄프:
+                triumpScript.Triump_Left_Shift();
+                break;
+        }
+    }
+    #endregion
 }
