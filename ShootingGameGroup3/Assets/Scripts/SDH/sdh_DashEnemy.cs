@@ -9,17 +9,25 @@ public class sdh_DashEnemy : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     Collider2D col;
+    AudioSource mys;
+    public GameObject Portal;
+    public AudioClip hitSound;
+    public AudioClip dieSound;
+    public AudioClip attSound;
     public Material flashM;
     public Material defaultM;
 
-    float speed = 2f;
+    float HP = 100f;
+    float speed = 4f;
     bool isattack = false;
+    bool isDead = false;
+    bool isHit = false;
+    bool startMV = false;
     float attdis = 3f;
-
-
 
     void Start()
     {
+        mys = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -30,24 +38,76 @@ public class sdh_DashEnemy : MonoBehaviour
             pt = playerObject.transform;
         }
     }
+
     void Update()
     {
-
-        if (!isattack)
+        if (startMV)
         {
-            MoveTowardPlayer();
-            CheckFlip();
-            if (Vector3.Distance(transform.position, pt.position) <= attdis)
+            if (!isattack && !isDead)
             {
-                Charge();
+                if (!isHit)
+                {
+                    MoveTowardPlayer();
+                    CheckFlip();
+                }
+                if (Vector3.Distance(transform.position, pt.position) <= attdis)
+                {
+                    Charge();
+                }
             }
-
         }
-
-
-
     }
 
+    public void GetDmg(float dmg)
+    {
+        mys.PlayOneShot(hitSound);
+        HP -= dmg;
+        StartCoroutine(Hit());
+        if (HP <= 0)
+        {
+            DontMove();
+            Die();
+        }
+    }
+
+    IEnumerator Hit()
+    {
+        DontMove();
+        isHit = true;
+        sr.material = flashM;
+        yield return new WaitForSeconds(0.1f);
+        sr.material = defaultM;
+        isHit = false;
+    }
+
+    void DontMove()
+    {
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void StartMove()
+    {
+        startMV = true;
+    }
+    void Die()
+    {
+        mys.PlayOneShot(dieSound);
+        col.enabled = false;
+        isDead = true;
+        anim.SetTrigger("Die");
+        Invoke("MakePortal", 1f);
+        Invoke("Disappear", 2f);
+    }
+
+    void MakePortal()
+    {
+        Instantiate(Portal, transform.position, Quaternion.identity);
+    }
+
+    void Disappear()
+    {
+        Destroy(gameObject);
+    }
 
     void CheckFlip()
     {
@@ -81,10 +141,11 @@ public class sdh_DashEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Debug.Log("발사");
+        mys.PlayOneShot(attSound);
         col.isTrigger = true;
         sr.material = defaultM;
         anim.SetTrigger("Att");
-        rb.AddForce(dir * 20, ForceMode2D.Impulse);
+        rb.AddForce(dir * 15, ForceMode2D.Impulse);
         StartCoroutine("cooldown");
     }
 
@@ -93,11 +154,12 @@ public class sdh_DashEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         col.isTrigger = false;
         rb.linearVelocity = Vector3.zero;
+        yield return new WaitForSeconds(0.5f);
         isattack = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //플레이어와 충돌 시 플레이어 피격처리
+        // 플레이어와 충돌 시 플레이어 피격처리
     }
 }

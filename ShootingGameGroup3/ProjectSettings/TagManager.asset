@@ -4,12 +4,19 @@
 TagManager:
   serializedVersion: 3
   tags:
+<<<<<<< HEAD
   - Monster
   - MiniMonster
   - Enemy
   - Shield
   - Bullet
   - Monster2
+=======
+  - Enemy
+  - Shield
+  - Monster
+  - Wall
+>>>>>>> main
   layers:
   - Default
   - TransparentFX
