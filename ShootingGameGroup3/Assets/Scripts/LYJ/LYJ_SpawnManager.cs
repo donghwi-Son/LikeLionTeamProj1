@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class LYJ_SpawnManager : MonoBehaviour
 {
+    [SerializeField]
     List<GameObject> enemies;
+    [SerializeField]
     List<Transform> spawnPoints;
     float waveInterval = 30f;
     int currentWave = 1;

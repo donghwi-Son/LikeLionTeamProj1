@@ -32,7 +32,7 @@ public class LYJ_BFShotGun : MonoBehaviour
 
     void OnEnable()
     {
-        // 플레이어 이동속도 감소
+        GameManager.Instance.Player.SpdChange(1.5f);
     }
 
     void FixedUpdate()

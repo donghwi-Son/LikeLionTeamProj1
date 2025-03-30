@@ -21,6 +21,8 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     Rigidbody2D _rb;
     float moveSpeed;
 
+    float timer;
+
     Vector2 targetVec;
     [SerializeField]
     GameObject boom;
@@ -31,16 +33,23 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         rotationTerm = new WaitForSeconds(0.5f);
     }
 
-    public void ThrowBurner()
+    void OnEnable()
     {
         StartCoroutine(RotateRandom());
         moveSpeed = 3f;
         targetVec = LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position;
-        Destroy(gameObject, 5f);
+    }
+
+    void Update()
+    {
+        if (!gameObject.activeSelf) { return; }
+        timer += Time.deltaTime;
+        if (timer > 5f) { LYJ_PoolManager.Instance.ReturnGameObject(gameObject); }
     }
 
     void FixedUpdate()
     {
+        if (!gameObject.activeSelf) { return; }
         Vector2 newDir = Vector2.Lerp(_rb.linearVelocity.normalized, targetVec.normalized, 0.3f);
         // targetVec = Vector2.Lerp(targetVec, transform.up, 0.1f);
         _rb.linearVelocity = newDir * moveSpeed;
@@ -61,8 +70,9 @@ public class LYJ_AlcoholBurner : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!gameObject.activeSelf) { return; }
         if (!collision.CompareTag("Enemy")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }
