@@ -62,10 +62,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isRolling)
-        {
-            return;
-        }
+        if (isRolling) { return; }
         Move();
         FlipPlayer();
     }
@@ -183,7 +180,6 @@ public class Player : MonoBehaviour
             moveSpeed = 1;
         }
     }
-
     public void AASChange(float num)
     {
         aas += num;

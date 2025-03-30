@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
 
+
     [Header("Scene Claer")]
     // 씬 클리어 상태 변수
     public bool isSceneCleared = false;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
 
     // 새로운 씬이 로드된 후 isSceneCleared를 초기화
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -68,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         // 매 프레임 씬 클리어 여부를 확인
@@ -82,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         isSceneCleared = true;
     }
+
 
     // 현재 씬의 다음 씬으로 이동하는 함수
     void LoadNextScene()
@@ -110,6 +114,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     void Awake()
     {
         if (Instance == null)
@@ -122,4 +127,5 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // 중복 방지
         }
     }
+
 }
