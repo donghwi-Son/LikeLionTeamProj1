@@ -136,7 +136,7 @@ public class CHW_Boomerang : MonoBehaviour
         boomerangShoother = shooterTransform.GetComponent<CHW_BoomerangShooter>();
         startPosition = transform.position;
         direction = throwDirection.normalized;
-        spriteRenderer.enabled = true;
+        //spriteRenderer.enabled = true;
         targetPosition = startPosition + direction * boomerangRange;
     }
 

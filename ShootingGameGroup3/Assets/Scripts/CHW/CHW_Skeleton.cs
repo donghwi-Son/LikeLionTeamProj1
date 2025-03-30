@@ -22,7 +22,7 @@ public class Skeleton : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         eAnimator = GetComponent<Animator>();
-        spawnManager = FindObjectOfType<SpawnManager>();
+        spawnManager = Object.FindFirstObjectByType<SpawnManager>();//spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     // Update is called once per frame
