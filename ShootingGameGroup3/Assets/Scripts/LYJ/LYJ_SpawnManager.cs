@@ -5,8 +5,8 @@ public class LYJ_SpawnManager : MonoBehaviour
 {
     List<GameObject> enemies;
     List<Transform> spawnPoints;
-    float waveInterval;
-    int currentWave;
+    float waveInterval = 30f;
+    int currentWave = 1;
     public int CurrentWave => currentWave;
 
     void Awake()
@@ -18,13 +18,14 @@ public class LYJ_SpawnManager : MonoBehaviour
     }
     void Update()
     {
-        if (LYJ_GameManager.Instance.CurrentStageTime >= waveInterval)
+        if (currentWave > 5) { return; }
+        if (LYJ_GameManager.Instance.CurrentStageTime % waveInterval == 0)
         {
-            StartWave();
+            StartNewWave();
         }
     }
 
-    void StartWave()
+    void StartNewWave()
     {
         for (int i = 0; i < 5+currentWave; ++i)
         {

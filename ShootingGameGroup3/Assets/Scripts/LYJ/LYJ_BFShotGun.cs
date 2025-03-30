@@ -25,7 +25,7 @@ public class LYJ_BFShotGun : MonoBehaviour
     {
         _readyToShoot = true;
         // 이하 수치조정 필요, temp now
-        _damage = 3;
+        _damage = 5;
         _maxBullet = 7;
         _attackDelay = new WaitForSeconds(2f);
     }
@@ -72,7 +72,7 @@ public class LYJ_BFShotGun : MonoBehaviour
             Vector2 bulletVec = new Vector2(bulletVecX, bulletVecY).normalized;
 
 
-            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, 5f/*temp*/);
+            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, _damage);
 
             Destroy(currentBullet, 1f);
         }

@@ -48,6 +48,7 @@ public class LYJ_GameManager : MonoBehaviour
         isTimeGoing = true;
         Time.timeScale = 1;
     }
+    
 
     #endregion
 }

@@ -10,6 +10,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
     float hp;
     private float moveSpeed = 1.5f;
     bool isHitRecent;
+    bool isHitWithOil;
     int burnStack;
 
     Rigidbody2D _rb;
@@ -29,6 +30,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         spriteRenderer = GetComponent<SpriteRenderer>();
         target = LYJ_GameManager.Instance.Player.transform;
         isHitRecent = false;
+        isHitWithOil = false;
     }
 
     void OnEnable()
@@ -36,6 +38,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         StartCoroutine(DropOil());
         hp = hpForWave[LYJ_GameManager.Instance.SpawnManager.CurrentWave];
         isHitRecent = false;
+        isHitWithOil = false;
         burnStack = 0;
     }
 
@@ -51,18 +54,27 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isHitRecent) { return; }
-        if (collision.CompareTag("Bullet"))
+        if (!isHitRecent)
         {
-            hp -= collision.GetComponent<LYJ_Bullet>().Damage;
+            if (collision.CompareTag("Bullet"))
+            {
+                hp -= collision.GetComponent<LYJ_Bullet>().Damage;
+                BurnFire(FIRE_CHANCE);
+            }
+            if (collision.CompareTag("Alcohol"))
+            {
+                hp -= collision.GetComponent<LYJ_AlcoholBurner>().Damage;
+                BurnFire(100);
+            }
+            
+            StartCoroutine(HitReaction());
+        }
+        if (!isHitWithOil && collision.CompareTag("Oil") && collision.GetComponent<LYJ_Oil>().IsBurn)
+        {
+            hp -= 0.5f;
             BurnFire(FIRE_CHANCE);
-        }
-        if (collision.CompareTag("Alcohol"))
-        {
-            hp -= collision.GetComponent<LYJ_AlcoholBurner>().Damage;
-            BurnFire(100);
-        }
-        StartCoroutine(HitReaction());
+            StartCoroutine(OilReaction());
+        } 
 
         if (hp <= 0)
         {
@@ -108,12 +120,20 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         isHitRecent = false;
     }
 
+    IEnumerator OilReaction()
+    {
+        isHitWithOil = true;
+        yield return new WaitForSeconds(0.5f);
+        isHitWithOil = false;
+    }
+
     IEnumerator Burn()
     {
         while (hp >= 0 && burnStack <= 3)
         {
             hp -= BURN_DAMAGE * burnStack;
             yield return burnDelay;
+            spriteRenderer.color = Color.red;
         }
     }
 
@@ -123,6 +143,6 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         StopCoroutine(Burn());
         StopCoroutine(DropOil());
         burnStack = 0;
-        gameObject.SetActive(false);
+        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }
