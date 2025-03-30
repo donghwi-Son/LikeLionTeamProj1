@@ -149,8 +149,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MouseManager: {fileID: 1392666846}
-  Player: {fileID: 0}
+  Player: {fileID: 650223281}
   WeaponManager: {fileID: 488724064}
+  isSceneCleared: 0
+  sceneOrder:
+  - MainScene
+  - CHW
+  - LHG
+  - LSM
+  - LYJ
+  - SDH
 --- !u!4 &484385366
 Transform:
   m_ObjectHideFlags: 0
@@ -195,6 +203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2a31055c1469a419402404d2884783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChargeRifle: {fileID: 0}
+  Boomerang: {fileID: 0}
+  Triump: {fileID: 9148357308396314773, guid: 3905301fb764dd94eb49479be6a30bc6, type: 3}
+  Muffin: {fileID: 4777758396526411051, guid: fa31d07b544833449a1748bfcf938953, type: 3}
+  BFShotGun: {fileID: 0}
+  AlcoholBurner: {fileID: 0}
+  MoneyGun: {fileID: 0}
+  gunPos: {fileID: 1551796337}
 --- !u!4 &488724065
 Transform:
   m_ObjectHideFlags: 0
@@ -210,6 +226,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650223281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6210618809885267200, guid: 18f4bd0eb279a9340896dd3d9a2b834e, type: 3}
+  m_PrefabInstance: {fileID: 1457195082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6037cff3f2e0ad6478387d530aeeb59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &796391456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -384,6 +411,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18f4bd0eb279a9340896dd3d9a2b834e, type: 3}
+--- !u!4 &1551796337 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5598689595643585167, guid: 18f4bd0eb279a9340896dd3d9a2b834e, type: 3}
+  m_PrefabInstance: {fileID: 1457195082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1573389097
 GameObject:
   m_ObjectHideFlags: 0
