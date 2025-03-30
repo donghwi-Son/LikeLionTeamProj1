@@ -53,8 +53,7 @@ public class WeaponManager : MonoBehaviour
 
     // 무기 스크립트 캐싱
     private sdh_Gun chargeRifleScript;
-
-    //private BoomerangShooter boomerangScript;
+    private CHW_BoomerangShooter boomerangScript;
     private LSM_Triump triumpScript;
     private LSM_Muffin muffinScript;
     private LYJ_BFShotGun bfShotGunScript;
@@ -79,14 +78,11 @@ public class WeaponManager : MonoBehaviour
     {
         return stage switch
         {
-            1 => new List<GameObject> { ChargeRifle },
-            2 => new List<GameObject> { Boomerang },
+            1 => new List<GameObject> { Boomerang },
+            2 => new List<GameObject> { },
             3 => new List<GameObject> { Triump, Muffin },
             4 => new List<GameObject> { BFShotGun, AlcoholBurner, MoneyGun },
-            5
-                => new List<GameObject>
-                { /* 한규님 무기 목록 */
-                },
+            5 => new List<GameObject> { ChargeRifle },
             _ => new List<GameObject>()
         };
     }
@@ -154,7 +150,7 @@ public class WeaponManager : MonoBehaviour
     private void UpdateWeaponScripts()
     {
         chargeRifleScript = currentWeapon.GetComponent<sdh_Gun>();
-        //boomerangScript = currentWeapon.GetComponent<BoomerangShooter>();
+        boomerangScript = currentWeapon.GetComponent<CHW_BoomerangShooter>();
         triumpScript = currentWeapon.GetComponent<LSM_Triump>();
         muffinScript = currentWeapon.GetComponent<LSM_Muffin>();
         bfShotGunScript = currentWeapon.GetComponent<LYJ_BFShotGun>();
@@ -166,8 +162,8 @@ public class WeaponManager : MonoBehaviour
     {
         if (chargeRifleScript != null)
             currentWeaponName = WeaponName.차지라이플;
-        //else if (boomerangScript != null)
-        //currentWeaponName = WeaponName.부메랑;
+        else if (boomerangScript != null)
+            currentWeaponName = WeaponName.부메랑;
         else if (triumpScript != null)
             currentWeaponName = WeaponName.트라이엄프;
         else if (muffinScript != null)
@@ -180,7 +176,7 @@ public class WeaponManager : MonoBehaviour
             currentWeaponName = WeaponName.머니건;
     }
 
-    #region Weapon Actions  
+    #region Weapon Actions
     public void NormalShoot() //mousebuttondown 0
     {
         switch (currentWeaponName)
@@ -189,7 +185,7 @@ public class WeaponManager : MonoBehaviour
                 chargeRifleScript.Shoot(mousePos);
                 break;
             case WeaponName.부메랑:
-                //ThrowBoomerang();
+                boomerangScript.ThrowBoomerang();
                 break;
             case WeaponName.트라이엄프:
                 triumpScript.Triump_Left_Click();
