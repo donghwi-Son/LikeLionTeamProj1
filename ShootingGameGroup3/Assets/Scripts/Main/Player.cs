@@ -248,4 +248,18 @@ public class Player : MonoBehaviour
     {
         aas += num;
     }
+
+    public void KickBackRequest(Vector3 vec, float amount)
+    {
+        StartCoroutine(KickBack(vec, amount));
+    }
+
+    IEnumerator KickBack(Vector3 vec, float Amount)
+    {
+        isKickBacked = true;
+        rb.linearVelocity = vec * Amount;
+        yield return new WaitForSeconds(0.2f);
+        isKickBacked = false;
+        
+    }
 }

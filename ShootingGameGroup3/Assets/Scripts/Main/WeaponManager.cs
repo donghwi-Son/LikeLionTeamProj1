@@ -206,7 +206,7 @@ public class WeaponManager : MonoBehaviour
                 alcoholBurnerScript.ThrowBurner();
                 break;
             case WeaponName.머니건:
-                //moneyGunScript.FireCoin();
+                moneyGunScript.FireCoin();
                 break;
         }
     }
@@ -222,7 +222,7 @@ public class WeaponManager : MonoBehaviour
                 triumpScript.Triump_Right_Click();
                 break;
             case WeaponName.머니건:
-                //moneyGunScript.FireBuck();
+                moneyGunScript.FireBuck();
                 break;
         }
     }
