@@ -42,6 +42,16 @@ public class LHG_Monster : MonoBehaviour
         {           
             Vector3 direction = (player.position - transform.position).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
+
+            // 플레이어 방향에 따라 회전
+            if (direction.x > 0)
+            {
+                spriteRenderer.flipX = false;       //오른쪽
+            }
+            else if (direction.x < 0)
+            {
+                spriteRenderer.flipX = true;        //왼쪽
+            }
         }
         else
         {

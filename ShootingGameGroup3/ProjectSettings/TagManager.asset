@@ -11,6 +11,9 @@ TagManager:
   - SpecialBullet
   - Monster
   - Wall
+  - MiniMonster
+  - Monster2
+  - Shield
   layers:
   - Default
   - TransparentFX
