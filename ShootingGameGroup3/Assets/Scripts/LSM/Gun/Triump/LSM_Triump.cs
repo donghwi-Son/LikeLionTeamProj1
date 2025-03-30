@@ -14,6 +14,8 @@ public class LSM_Triump : MonoBehaviour
     public Transform pos = null;
 
     private bool isReady = true;
+    private bool isCooldown = false;
+    private float remainingCooldown = 0f;
     private bool draw = false;
     public bool loyalty = false;
     public bool fatal = false;
@@ -58,6 +60,28 @@ public class LSM_Triump : MonoBehaviour
 
     private void Update()
     {
+        if (isCooldown)
+        {
+            remainingCooldown -= Time.deltaTime;
+            if (remainingCooldown <= 0f)
+            {
+                isCooldown = false;
+                isReady = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Triump_Left_Shift();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            Triump_Left_Click();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            Triump_Right_Click();
+        }
         HandleJoker();
         CheckSpadeStack();
     }
@@ -72,7 +96,8 @@ public class LSM_Triump : MonoBehaviour
 
             FireBullet(currentShootType, targetPosition);
             isReady = false;
-            StartCoroutine(ShootDelay());
+            isCooldown = true;
+            remainingCooldown = shoot_delay;
         }
     }
 
@@ -235,15 +260,11 @@ public class LSM_Triump : MonoBehaviour
         {
             loyalty_remain--;
             if (loyalty_remain == 0)
-                StartCoroutine(ResetLoyalty());
+            {
+                loyalty = false;
+                loyalty_remain = 3; // 초기화
+            }
         }
-    }
-
-    private IEnumerator ResetLoyalty()
-    {
-        yield return new WaitForEndOfFrame();
-        loyalty = false;
-        loyalty_remain = 3;
     }
 
     // 조커 드로우 처리 함수
@@ -299,12 +320,5 @@ public class LSM_Triump : MonoBehaviour
                 fatal_remain = 1; // 초기화
             }
         }
-    }
-
-    // 발사 후 대기 시간 처리
-    private IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(shoot_delay);
-        isReady = true;
     }
 }

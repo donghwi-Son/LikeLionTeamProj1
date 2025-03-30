@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Shield
+  - Bullet
+  - Muffin
+  - SpecialBullet
   - Monster
   - Wall
   layers:

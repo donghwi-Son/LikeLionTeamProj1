@@ -5,20 +5,23 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header ("Game Objects")]
+    [Header("Game Objects")]
     #region Objects
-    public MouseManager MouseManager ;
-    public Player Player ;
+    public MouseManager MouseManager;
+    public Player Player;
     public WeaponManager WeaponManager;
     #endregion
 
 
-    [Header ("Scene Claer")]
+
+    [Header("Scene Claer")]
     // 씬 클리어 상태 변수
     public bool isSceneCleared = false;
+
     // 씬 전환 순서 배열
     public string[] sceneOrder = new string[] { "MainScene", "CHW", "LHG", "LSM", "LYJ", "SDH" };
 
+    public int stage { get; private set; } = 0;
 
     // 씬이 로드될 때 호출되는 이벤트 등록
     private void OnEnable()
@@ -30,11 +33,44 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    // 새로운 씬이 로드된 후 호출되어 isSceneCleared를 false로 초기화합니다.
+
+
+    // 새로운 씬이 로드된 후 isSceneCleared를 초기화
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         isSceneCleared = false;
+        UpdateStage(scene.name);
     }
+
+    private void UpdateStage(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "MainScene":
+                stage = 0;
+                break;
+            case "CHW":
+                stage = 1;
+                break;
+            case "LHG":
+                stage = 2;
+                break;
+            case "LSM":
+                stage = 3;
+                break;
+            case "LYJ":
+                stage = 4;
+                break;
+            case "SDH":
+                stage = 5;
+                break;
+            default:
+                stage = 0;
+                break;
+        }
+    }
+
+
     void Update()
     {
         // 매 프레임 씬 클리어 여부를 확인
@@ -79,12 +115,9 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-
-
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);

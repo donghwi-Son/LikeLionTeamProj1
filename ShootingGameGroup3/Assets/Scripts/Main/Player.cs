@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     float moveSpeed;
     float hp;
     float aas = 0;
+
     [SerializeField]
     GameObject currentWeapon;
     #endregion
@@ -52,7 +53,10 @@ public class Player : MonoBehaviour
 
     void OnJump()
     {
-        if (isRolling || !readyToRoll) { return; }
+        if (isRolling || !readyToRoll)
+        {
+            return;
+        }
         StartCoroutine(Rolling());
     }
 
@@ -97,7 +101,8 @@ public class Player : MonoBehaviour
         Vector3 rollDir = new Vector3(inputVec.x, inputVec.y, 0).normalized;
         if (rollDir == Vector3.zero)
         {
-            Vector3 rollToMouseVec = GameManager.Instance.MouseManager.GetMousePos() - transform.position;
+            Vector3 rollToMouseVec =
+                GameManager.Instance.MouseManager.GetMousePos() - transform.position;
             rollDir = new Vector3(rollToMouseVec.x, rollToMouseVec.y, 0).normalized;
         }
         rb.AddForce(rollDir * ROLLING_POWER, ForceMode2D.Impulse);
@@ -110,9 +115,12 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        if (!Input.GetMouseButtonDown(0)) { return; }
-
+        if (!Input.GetMouseButtonDown(0))
+        {
+            return;
+        }
     }
+
     void Update()
     {
         ControlWeapon();
@@ -144,6 +152,11 @@ public class Player : MonoBehaviour
         {
             GameManager.Instance.WeaponManager.ChargeSkill();
         }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            GameManager.Instance.WeaponManager.ChargeSkillEnd();
+        }
     }
 
     public void HPChange(float num)
@@ -167,7 +180,6 @@ public class Player : MonoBehaviour
             moveSpeed = 1;
         }
     }
-
     public void AASChange(float num)
     {
         aas += num;
