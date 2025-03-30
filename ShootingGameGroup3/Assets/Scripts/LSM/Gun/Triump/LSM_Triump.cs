@@ -91,7 +91,7 @@ public class LSM_Triump : MonoBehaviour
     {
         if (isReady)
         {
-            Vector3 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 targetPosition = GameManager.Instance.MouseManager.GetMousePos();
             targetPosition.z = 0;
 
             FireBullet(currentShootType, targetPosition);
@@ -287,7 +287,7 @@ public class LSM_Triump : MonoBehaviour
                 Blessing_Speed();
                 break;
             case 1:
-                Blessing_Protect();
+                Blessing_Health();
                 break;
             case 2:
                 Blessing_Power();
@@ -296,10 +296,18 @@ public class LSM_Triump : MonoBehaviour
     }
 
     // 신속 실현
-    private void Blessing_Speed() => Debug.Log("신속실현");
+    private void Blessing_Speed()
+    {
+        GameManager.Instance.Player.SpdChange(3f);
+        Debug.Log("신속실현");
+    }
 
-    // 보호 실현
-    private void Blessing_Protect() => Debug.Log("보호실현");
+    // 회복 실현
+    private void Blessing_Health()
+    {
+        GameManager.Instance.Player.HPChange(1f);
+        Debug.Log("회복실현");
+    }
 
     // 치명 실현
     private void Blessing_Power()

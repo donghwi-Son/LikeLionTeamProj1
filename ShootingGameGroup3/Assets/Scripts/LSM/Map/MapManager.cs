@@ -30,6 +30,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         StartStage1();
+        GameManager.Instance.Player.SpdChange(5f);
     }
 
     void Update()
@@ -78,6 +79,7 @@ public class MapManager : MonoBehaviour
         }
         else if (currentStage == 2)
         {
+            GameManager.Instance.ClearScene(); // 게임 클리어 처리
             Debug.Log("Game Clear!");
         }
     }

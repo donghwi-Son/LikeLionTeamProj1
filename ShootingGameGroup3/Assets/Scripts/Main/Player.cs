@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     GameObject currentWeapon;
+
+    private bool isInvincible = false;
+    private float invincibleDuration = 2f;
+    private float blinkInterval = 0.2f;
     #endregion
 
     #region Player Actions
@@ -33,6 +37,9 @@ public class Player : MonoBehaviour
     Vector2 inputVec;
     Rigidbody2D rb;
     SpriteRenderer playerSpriteRenderer;
+    private Vector2 prevPosition;
+    private ContactPoint2D[] contacts = new ContactPoint2D[10];
+    private int contactCount = 0;
     #endregion
 
     void Awake()
@@ -62,7 +69,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isRolling) { return; }
+        if (isRolling)
+        {
+            return;
+        }
         Move();
         FlipPlayer();
     }
@@ -70,7 +80,32 @@ public class Player : MonoBehaviour
     void Move()
     {
         Vector2 nextVec = inputVec * moveSpeed;
-        rb.linearVelocity = nextVec;
+        Vector2 currentPosition = rb.position;
+        bool hasMonsterCollision = false;
+
+        contactCount = rb.GetContacts(contacts);
+
+        for (int i = 0; i < contactCount; i++)
+        {
+            if (contacts[i].collider.CompareTag("Monster"))
+            {
+                Vector2 collisionNormal = contacts[i].normal;
+
+                // 몬스터와의 충돌 각도가 너무 작으면 이동 제한
+                float collisionAngle = Vector2.Angle(nextVec, -collisionNormal);
+                if (collisionAngle < 90f)
+                {
+                    // 몬스터 방향으로의 이동 성분을 더 강하게 제거
+                    nextVec = (Vector2)Vector3.ProjectOnPlane(nextVec, collisionNormal) * 0.5f;
+                    hasMonsterCollision = true;
+                }
+            }
+        }
+
+        if (!hasMonsterCollision || nextVec.magnitude > 0)
+        {
+            rb.MovePosition(currentPosition + nextVec * Time.fixedDeltaTime);
+        }
     }
 
     void InitAllActions()
@@ -161,15 +196,43 @@ public class Player : MonoBehaviour
 
     public void HPChange(float num)
     {
-        hp += num;
-        if (hp <= 0)
+        // 피해를 입을 때만 무적 적용 (회복할 때는 제외)
+        if (num < 0 && !isInvincible)
         {
-            hp = 0;
+            hp += num;
+            if (hp <= 0)
+            {
+                hp = 0;
+            }
+            Debug.Log("피해 입음");
+            StartCoroutine(InvincibleRoutine());
         }
-        else if (hp >= MAX_HP)
+        else if (num > 0) // 회복
         {
-            hp = MAX_HP;
+            hp += num;
+            if (hp >= MAX_HP)
+            {
+                hp = MAX_HP;
+            }
         }
+    }
+
+    private IEnumerator InvincibleRoutine()
+    {
+        isInvincible = true;
+        float endTime = Time.time + invincibleDuration;
+
+        // 깜빡임 효과
+        while (Time.time < endTime)
+        {
+            playerSpriteRenderer.enabled = false;
+            yield return new WaitForSeconds(blinkInterval);
+            playerSpriteRenderer.enabled = true;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        playerSpriteRenderer.enabled = true;
+        isInvincible = false;
     }
 
     public void SpdChange(float num)
@@ -180,6 +243,7 @@ public class Player : MonoBehaviour
             moveSpeed = 1;
         }
     }
+
     public void AASChange(float num)
     {
         aas += num;
