@@ -30,7 +30,7 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         StartStage1();
-        GameManager.Instance.Player.SpdChange(5f);
+        //GameManager.Instance.Player.SpdChange(5f);
     }
 
     void Update()
