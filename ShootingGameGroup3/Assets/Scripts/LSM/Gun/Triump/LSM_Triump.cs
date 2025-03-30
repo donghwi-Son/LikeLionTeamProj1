@@ -12,6 +12,7 @@ public class LSM_Triump : MonoBehaviour
     public GameObject king_bullet;
 
     public Transform pos = null;
+    public SpriteRenderer gunSpriteRenderer = null;
 
     private bool isReady = true;
     private bool isCooldown = false;
@@ -56,6 +57,11 @@ public class LSM_Triump : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        gunSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -327,6 +333,18 @@ public class LSM_Triump : MonoBehaviour
                 fatal = false;
                 fatal_remain = 1; // 초기화
             }
+        }
+    }
+
+    void FlipGun()
+    {
+        if (GameManager.Instance.MouseManager.GetMousePos().x < transform.position.x)
+        {
+            gunSpriteRenderer.flipX = true;
+        }
+        else
+        {
+            gunSpriteRenderer.flipX = false;
         }
     }
 }
