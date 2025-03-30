@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7805afc91f10d8248bb2c7e62a91ea3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portal: {fileID: 0}
   hitSound: {fileID: 8300000, guid: edb5058aaff7a0e479826984e76ccc82, type: 3}
   dieSound: {fileID: 8300000, guid: cdd382e4f1c34254087c4286c878bf22, type: 3}
   attSound: {fileID: 8300000, guid: 9c6d6b350346ed6488653da2744107da, type: 3}
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &3664088303413053645
 Animator:
   serializedVersion: 7
