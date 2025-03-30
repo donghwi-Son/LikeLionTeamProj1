@@ -1253,6 +1253,14 @@ MonoBehaviour:
   MouseManager: {fileID: 1705823029}
   Player: {fileID: 1082557666}
   WeaponManager: {fileID: 0}
+  isSceneCleared: 0
+  sceneOrder:
+  - MainScene
+  - CHW
+  - LHG
+  - LSM
+  - LYJ
+  - SDH
 --- !u!1 &1216403885
 GameObject:
   m_ObjectHideFlags: 0
@@ -38015,11 +38023,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2005352009}
-  - {fileID: 147381316}
   - {fileID: 1210292253}
   - {fileID: 1705823028}
   - {fileID: 1609234173}
   - {fileID: 1848314042}
+  - {fileID: 147381316}
   - {fileID: 1082557668}
   - {fileID: 1258249754}
   - {fileID: 1898606944}

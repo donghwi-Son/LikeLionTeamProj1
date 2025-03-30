@@ -7,6 +7,7 @@ public class LYJ_SpawnManager : MonoBehaviour
     List<Transform> spawnPoints;
     float waveInterval;
     int currentWave;
+    public int CurrentWave => currentWave;
 
     void Awake()
     {
@@ -25,7 +26,12 @@ public class LYJ_SpawnManager : MonoBehaviour
 
     void StartWave()
     {
-
+        for (int i = 0; i < 5+currentWave; ++i)
+        {
+            int randomPointNo = Random.Range(0, spawnPoints.Count);
+            GameObject enemy = LYJ_PoolManager.Instance.GetGameObject(enemies[i]);
+            enemy.transform.position = spawnPoints[randomPointNo].position;
+        }
         currentWave++;
     }
 }

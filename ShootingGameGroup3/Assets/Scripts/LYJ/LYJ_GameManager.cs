@@ -8,6 +8,7 @@ public class LYJ_GameManager : MonoBehaviour
     public LYJ_Aiming Aim ;
     public LYJ_Player Player ;
     public LYJ_WeaponManager WeaponManager;
+    public LYJ_SpawnManager SpawnManager;
     #endregion
 
 
