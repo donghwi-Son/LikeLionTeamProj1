@@ -1,12 +1,22 @@
 using System.Collections;
 using UnityEngine;
 
-public class LYJ_Enemy_Oil : MonoBehaviour
+public class LYJ_Enemy_Oil : LYJ_NormalEnemy
 {
     const float FIRE_CHANCE = 0.1f;
+    const float BURN_DAMAGE = 0.5f;
+    const float BURN_DELAY = 0.5f;
+    float moneyChaseRange = 5f;
+    float[] hpForWave = { 150, 200, 250, 300, 350 }; // temp
+    float hp;
     private float moveSpeed = 1.5f;
+    bool isHitRecent;
+    bool isHitWithOil;
+    int burnStack;
+
     Rigidbody2D _rb;
     WaitForSeconds oilDropInterval;
+    WaitForSeconds burnDelay;
     SpriteRenderer spriteRenderer;
     [SerializeField]
     GameObject oil;
@@ -17,40 +27,69 @@ public class LYJ_Enemy_Oil : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         oilDropInterval = new WaitForSeconds(2f);
+        burnDelay = new WaitForSeconds(BURN_DELAY);
         spriteRenderer = GetComponent<SpriteRenderer>();
         target = LYJ_GameManager.Instance.Player.transform;
-    }
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Aggro")) {return;}
-        target = collision.transform;
-        if (target == null)
-        {
-            target = LYJ_GameManager.Instance.Player.transform;
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Bullet")) { return; }
-        RandomFire();
-        // hp --;
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Aggro")) {return;}
-        target = LYJ_GameManager.Instance.Player.transform;
+        isHitRecent = false;
+        isHitWithOil = false;
     }
 
     void OnEnable()
     {
         StartCoroutine(DropOil());
+        hp = hpForWave[LYJ_GameManager.Instance.SpawnManager.CurrentWave];
+        isHitRecent = false;
+        isHitWithOil = false;
+        burnStack = 0;
     }
 
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isHitRecent)
+        {
+            if (collision.CompareTag("Bullet"))
+            {
+                hp -= collision.GetComponent<LYJ_Bullet>().Damage;
+                BurnFire(FIRE_CHANCE);
+            }
+            if (collision.CompareTag("Alcohol"))
+            {
+                hp -= collision.GetComponent<LYJ_AlcoholBurner>().Damage;
+                BurnFire(100);
+            }
+            
+            StartCoroutine(HitReaction());
+        }
+        if (!isHitWithOil && collision.CompareTag("Oil") && collision.GetComponent<LYJ_Oil>().IsBurn)
+        {
+            hp -= 0.5f;
+            BurnFire(FIRE_CHANCE);
+            StartCoroutine(OilReaction());
+        } 
+
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    void UpdateTarget()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, moneyChaseRange);
+        foreach (var hit in hits)
+        {
+            if (hit.CompareTag("Money"))
+            {
+                target = hit.transform;
+                return;
+            }
+        }
+        target = LYJ_GameManager.Instance.Player.transform;
+    }
     void FixedUpdate()
     {
+        UpdateTarget();
         Vector2 nextVec = (target.position-transform.position).normalized * moveSpeed;
         _rb.linearVelocity = nextVec;
         spriteRenderer.flipX = target.transform.position.x < transform.position.x;
@@ -65,11 +104,45 @@ public class LYJ_Enemy_Oil : MonoBehaviour
         }
     }
 
-    void RandomFire()
+    void BurnFire(float percent)
     {
-        if (Random.value <= FIRE_CHANCE)
+        if (burnStack >= 3) { burnStack = 3; }
+        if (Random.value <= percent)
         {
-            // hp 지속딜 코루틴
+            StartCoroutine(Burn());
         }
+    }
+
+    IEnumerator HitReaction()
+    {
+        isHitRecent = true;
+        yield return new WaitForSeconds(0.1f);
+        isHitRecent = false;
+    }
+
+    IEnumerator OilReaction()
+    {
+        isHitWithOil = true;
+        yield return new WaitForSeconds(0.5f);
+        isHitWithOil = false;
+    }
+
+    IEnumerator Burn()
+    {
+        while (hp >= 0 && burnStack <= 3)
+        {
+            hp -= BURN_DAMAGE * burnStack;
+            yield return burnDelay;
+            spriteRenderer.color = Color.red;
+        }
+    }
+
+    void Die()
+    {
+        StopCoroutine(HitReaction());
+        StopCoroutine(Burn());
+        StopCoroutine(DropOil());
+        burnStack = 0;
+        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }

@@ -4,16 +4,15 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
-  - Shield
   - Bullet
-  - Muffin
-  - SpecialBullet
   - Monster
-  - Wall
+  - SpecialBullet
   - MiniMonster
   - Monster2
-  - Shield
+  - Muffin
+  - Money
+  - Oil
+  - Alcohol
   layers:
   - Default
   - TransparentFX
