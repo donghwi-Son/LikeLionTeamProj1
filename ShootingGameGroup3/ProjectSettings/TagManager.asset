@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Monster
   - Enemy
   - Shield
-  - Bullet
+  - Monster
+  - Wall
   layers:
   - Default
   - TransparentFX
