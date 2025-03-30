@@ -28,6 +28,9 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private GameObject MoneyGun;
 
+    [SerializeField]
+    private GameObject BounceGun;
+
     #endregion
 
     [Header("References")]
@@ -42,7 +45,8 @@ public class WeaponManager : MonoBehaviour
         머핀,
         무거운총,
         알코올램프,
-        머니건
+        머니건,
+        바운스건
     }
 
     private List<GameObject> weaponList;
@@ -59,6 +63,8 @@ public class WeaponManager : MonoBehaviour
     private LYJ_BFShotGun bfShotGunScript;
     private LYJ_AlcoholBurner alcoholBurnerScript;
     private LYJ_MoneyGun moneyGunScript;
+
+    //private LHG_Bounce_Gun bounceGunScript;
 
     void Start()
     {
