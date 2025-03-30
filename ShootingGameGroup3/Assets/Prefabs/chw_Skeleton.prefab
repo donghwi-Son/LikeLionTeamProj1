@@ -128,7 +128,7 @@ MonoBehaviour:
   health: 1
   moveSpeed: 1
   detectionRange: 4
-  boneSpeed: 6
+  boneSpeed: 5
   fireRate: 2
   bonePrefab: {fileID: 842327516658184094, guid: d52b979155ec7954fa93a973c6d43c79, type: 3}
 --- !u!61 &7840837135695742905

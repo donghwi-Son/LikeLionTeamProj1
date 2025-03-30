@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossSkeleton : MonoBehaviour
@@ -16,6 +17,8 @@ public class BossSkeleton : MonoBehaviour
 
     Animator eAnimator;
     public GameObject bonePrefab;
+    public GameObject portalPrefab;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -44,20 +47,39 @@ public class BossSkeleton : MonoBehaviour
 
         if (health <= 0)
         {
-            GameManager gm = Object.FindFirstObjectByType<GameManager>();
+            /*GameManager gm = Object.FindFirstObjectByType<GameManager>();
             if (gm != null)
             {
                 gm.isSceneCleared = true;
-            }
+            }*/
 
             // 보스 죽음 처리
-            Destroy(gameObject);
 
+            StartCoroutine(SpawnPortalAndDestroy());
+            //Destroy(gameObject);
+            //Instantiate(portalPrefab, transform.position, Quaternion.identity);
 
 
         }
 
 
+    }
+    IEnumerator SpawnPortalAndDestroy()
+    {
+        // 1초 대기
+        yield return new WaitForSeconds(1f);
+
+        // Portal 오브젝트 생성
+        if (portalPrefab != null)
+        {
+            Instantiate(portalPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("Portal Prefab이 할당되지 않았습니다.");
+        }
+        // 보스 오브젝트 제거
+        Destroy(gameObject);
     }
 
     void ShootBone()
@@ -65,10 +87,10 @@ public class BossSkeleton : MonoBehaviour
         // Bone 
         GameObject bone = Instantiate(bonePrefab, transform.position, Quaternion.identity);
 
-        //  (Player - BoneShooter ��ġ)
+        //  (Player - BoneShooter)
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // Bone�� Rigidbody2D 
+        // Bone Rigidbody2D 
         Rigidbody2D rb = bone.GetComponent<Rigidbody2D>();
 
         if (rb != null)
