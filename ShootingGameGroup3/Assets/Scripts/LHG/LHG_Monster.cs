@@ -9,7 +9,7 @@ public class LHG_Monster : MonoBehaviour
 
     public float moveSpeed = 1f; // 몬스터의 이동 속도
     private Transform player; // 플레이어의 Transform
-    public float chaseDistance = 7f; // 몬스터가 플레이어를 추적하는 거리
+    public float chaseDistance = 10f; // 몬스터가 플레이어를 추적하는 거리
 
     private Vector3 randomDirection; // 랜덤 방향
     private float changeDirectionTime = 2f; // 방향 변경 주기
