@@ -170,6 +170,7 @@ public class Player : MonoBehaviour
         {
             hp = MAX_HP;
         }
+        Debug.Log("HP: " + hp);
     }
 
     public void SpdChange(float num)

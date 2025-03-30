@@ -160,6 +160,9 @@ public class sdh_DashEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 플레이어와 충돌 시 플레이어 피격처리
+        if(collision.CompareTag("Player"))
+        {
+            collision.GetComponent<Player>().HPChange(-1);
+        }
     }
 }

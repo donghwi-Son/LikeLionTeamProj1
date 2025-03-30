@@ -6,7 +6,8 @@ public class sdh_Portal : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //¥Ÿ¿Ωæ¿
+            GameManager gm = Object.FindFirstObjectByType<GameManager>();
+            gm.isSceneCleared = true;
         }
     }
 }
