@@ -1301,7 +1301,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -6.5, y: -0.5, z: 0}
+=======
+  m_LocalPosition: {x: 67, y: -0.5, z: 0}
+>>>>>>> Stashed changes
 =======
   m_LocalPosition: {x: 67, y: -0.5, z: 0}
 >>>>>>> Stashed changes
@@ -7050,7 +7054,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -6.5, y: -0.5, z: -10}
+=======
+  m_LocalPosition: {x: 67, y: -0.5, z: -10}
+>>>>>>> Stashed changes
 =======
   m_LocalPosition: {x: 67, y: -0.5, z: -10}
 >>>>>>> Stashed changes
@@ -7810,7 +7818,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -1.3360214, y: -0.49999917, z: -10}
+=======
+  m_LocalPosition: {x: 67, y: -0.5, z: -10}
+>>>>>>> Stashed changes
 =======
   m_LocalPosition: {x: 67, y: -0.5, z: -10}
 >>>>>>> Stashed changes
