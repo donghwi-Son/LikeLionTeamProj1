@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7756819103208918421}
   - component: {fileID: 2766706475111248390}
   - component: {fileID: 2569327776538833914}
-  - component: {fileID: 8379675289055169930}
   - component: {fileID: 5378532363372733437}
-  - component: {fileID: -2694280904898603387}
+  - component: {fileID: 4779255374551780695}
+  - component: {fileID: 5770891849237133860}
   m_Layer: 0
-  m_Name: sdh_Bullet2
+  m_Name: sdh_Bullet3
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 2679536864150801842, guid: 0201085723b343147aa992846dc747ff, type: 3}
+  m_Sprite: {fileID: 2173002054968832257, guid: 0201085723b343147aa992846dc747ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,42 +118,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &8379675289055169930
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5015968437286055039}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.12839305
 --- !u!114 &5378532363372733437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,8 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77087c8aadcd98545a281d188a818ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 4
---- !u!82 &-2694280904898603387
+  dmg: 5
+--- !u!82 &4779255374551780695
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,8 +141,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 13f0ddf5c486b9c4995180caef814d63, type: 3}
-  m_Resource: {fileID: 8300000, guid: 13f0ddf5c486b9c4995180caef814d63, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 46ea1a6e21df1dc42806cf31f72ef9cf, type: 3}
+  m_Resource: {fileID: 8300000, guid: 46ea1a6e21df1dc42806cf31f72ef9cf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -264,3 +228,40 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &5770891849237133860
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5015968437286055039}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.049458712, y: -0.05160904}
+  m_Size: {x: 0.41079658, y: 1.578526}
+  m_Direction: 0
