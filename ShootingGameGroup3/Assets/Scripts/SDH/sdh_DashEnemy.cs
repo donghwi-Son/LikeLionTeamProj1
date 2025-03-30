@@ -10,6 +10,7 @@ public class sdh_DashEnemy : MonoBehaviour
     Animator anim;
     Collider2D col;
     AudioSource mys;
+    public GameObject Portal;
     public AudioClip hitSound;
     public AudioClip dieSound;
     public AudioClip attSound;
@@ -94,7 +95,13 @@ public class sdh_DashEnemy : MonoBehaviour
         col.enabled = false;
         isDead = true;
         anim.SetTrigger("Die");
-        Invoke("Disappear", 1f);
+        Invoke("MakePortal", 1f);
+        Invoke("Disappear", 2f);
+    }
+
+    void MakePortal()
+    {
+        Instantiate(Portal, transform.position, Quaternion.identity);
     }
 
     void Disappear()
