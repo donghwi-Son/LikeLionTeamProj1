@@ -7,6 +7,7 @@ public class LYJ_SpawnManager : MonoBehaviour
     List<Transform> spawnPoints;
     float waveInterval;
     int currentWave;
+    public int CurrentWave => currentWave;
 
     void Awake()
     {

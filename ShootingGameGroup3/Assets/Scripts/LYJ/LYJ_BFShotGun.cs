@@ -72,7 +72,7 @@ public class LYJ_BFShotGun : MonoBehaviour
             Vector2 bulletVec = new Vector2(bulletVecX, bulletVecY).normalized;
 
 
-            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/);
+            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, 5f/*temp*/);
 
             Destroy(currentBullet, 1f);
         }

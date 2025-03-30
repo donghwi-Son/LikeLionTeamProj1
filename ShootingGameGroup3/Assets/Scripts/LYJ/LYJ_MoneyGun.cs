@@ -74,6 +74,6 @@ public class LYJ_MoneyGun : MonoBehaviour
     {
         Vector2 directionVec = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
         GameObject currentBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(directionVec, 10f/*temp*/);
+        currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(directionVec, 10f/*temp*/, 1f/*temp*/);
     }
 }
