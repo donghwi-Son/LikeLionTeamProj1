@@ -27,8 +27,12 @@ public class LYJ_AlcoholBurner : MonoBehaviour
 
     void Awake()
     {
-        rotationTerm = new WaitForSeconds(0.5f);
         _rb = GetComponent<Rigidbody2D>();
+        rotationTerm = new WaitForSeconds(0.5f);
+    }
+
+    public void ThrowBurner()
+    {
         StartCoroutine(RotateRandom());
         moveSpeed = 3f;
         targetVec = LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position;

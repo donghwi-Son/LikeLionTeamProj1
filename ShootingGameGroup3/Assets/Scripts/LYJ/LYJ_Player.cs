@@ -85,7 +85,27 @@ void Update()
 
 
     #region 아직 메인으로 안 옮긴 부분
-    
+    int maxHp = 7; // temp
+    int baseHp = 5;
+    int currentHp;
+    public int BasePlayerHp => baseHp;
+    public int CurrentPlayerHp => currentHp;
+    bool isMujuk = false;
+    WaitForSeconds mujukTime = new WaitForSeconds(3f);
+    void Hitted()
+    {
+        if (isMujuk) { return; }
+        currentHp--;
+        StartCoroutine(NotHittedNow());
+    }
+
+    IEnumerator NotHittedNow()
+    {
+        isMujuk = true;
+        // 스프라이트 렌더러로 깜빡깜빡 할지
+        yield return mujukTime;
+        isMujuk = false;
+    }
     #endregion
 
 
