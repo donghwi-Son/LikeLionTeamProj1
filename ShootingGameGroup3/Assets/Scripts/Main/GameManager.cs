@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public Player Player;
     public WeaponManager WeaponManager;
     public LYJ_SpawnManager SpawnManager;
-    #endregion
 
     [Header("Scene Clear")]
     // 씬 클리어 상태 변수

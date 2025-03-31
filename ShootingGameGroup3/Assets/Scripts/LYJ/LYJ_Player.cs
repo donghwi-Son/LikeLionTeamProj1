@@ -87,7 +87,7 @@ void Update()
     #region 아직 메인으로 안 옮긴 부분
     int maxHp = 7; // temp
     int baseHp = 5;
-    int currentHp;
+    int currentHp = 5;
     public int BasePlayerHp => baseHp;
     public int CurrentPlayerHp => currentHp;
     bool isMujuk = false;
