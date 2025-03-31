@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
 
     [SerializeField]
     private GameObject stage2MapPrefab;
+
     [SerializeField]
     private GameObject stage4MapPrefab;
 
@@ -35,6 +36,7 @@ public class MapManager : MonoBehaviour
     private int currentWave = 0;
     private bool isStageCleared = false;
     private bool isWaveCleared = true;
+    private Coroutine currentWaveRoutine; // 현재 실행 중인 웨이브 코루틴
 
     void Awake()
     {
@@ -62,6 +64,52 @@ public class MapManager : MonoBehaviour
             Debug.Log($"Stage {currentStage} Clear!");
             ClearCurrentStage();
         }
+
+        // 웨이브 스킵 키
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SkipToNextWave();
+        }
+    }
+
+    private void SkipToNextWave()
+    {
+        // 현재 웨이브의 몬스터들 제거
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+        foreach (GameObject monster in monsters)
+        {
+            Destroy(monster);
+        }
+
+        // 현재 실행 중인 웨이브 코루틴 중지
+        if (currentWaveRoutine != null)
+        {
+            StopCoroutine(currentWaveRoutine);
+        }
+
+        // 다음 웨이브 시작
+        switch (currentWave)
+        {
+            case 0:
+                currentWave++;
+                SpawnWave2();
+                break;
+            case 1:
+                currentWave++;
+                SpawnWave3();
+                break;
+            case 2:
+                currentWave++;
+                SpawnWave4();
+                break;
+            case 3:
+                currentWave++;
+                SpawnWave5();
+                break;
+            case 4:
+                ClearCurrentStage();
+                break;
+        }
     }
 
     public void StartStage1()
@@ -82,7 +130,8 @@ public class MapManager : MonoBehaviour
             GameManager.Instance.Player.transform.position = playerSpawnPoint.position;
         }
 
-        StartCoroutine(Stage1WaveRoutine());
+        currentWaveRoutine = StartCoroutine(Stage1WaveRoutine());
+
     }
 
     private IEnumerator Stage1WaveRoutine()
