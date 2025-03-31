@@ -37,22 +37,15 @@ public class LYJ_BFShotGun : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.FromToRotation(Vector3.right, LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position);
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, GameManager.Instance.MouseManager.GetMousePos() - transform.position);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
-    }
 
     public void Fire()
     {
         if (!ReadyToShoot) { return; }
 
-        Vector2 direction = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
+        Vector2 direction = (GameManager.Instance.MouseManager.GetMousePos() - transform.position).normalized;
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 이러면 굳이 X Y 따로 구할 필요 없음
 
 

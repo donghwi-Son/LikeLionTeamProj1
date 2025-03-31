@@ -30,14 +30,14 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         StartCoroutine(RotateRandom());
         moveSpeed = 3f;
         _damage = 4f;
-        targetVec = LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position;
+        targetVec = GameManager.Instance.MouseManager.GetMousePos()-transform.position;
     }
 
     void Update()
     {
         if (!gameObject.activeSelf) { return; }
         timer += Time.deltaTime;
-        if (timer > 5f) { LYJ_PoolManager.Instance.ReturnGameObject(gameObject); }
+        if (timer > 5f) { PoolManager.Instance.ReturnGameObject(gameObject); }
     }
 
     void FixedUpdate()
@@ -66,6 +66,6 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         if (!gameObject.activeSelf) { return; }
         if (!collision.CompareTag("Monster")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
-        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
+        PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }

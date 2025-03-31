@@ -26,6 +26,6 @@ public class LYJ_Oil : MonoBehaviour
         isBurn = true;
         yield return new WaitForSeconds(3f);
         isBurn = false;
-        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
+        PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }

@@ -262,4 +262,10 @@ public class Player : MonoBehaviour
         isKickBacked = false;
         
     }
+
+    int maxHp = 7; // temp
+    int baseHp = 5;
+    int currentHp;
+    public int BasePlayerHp => baseHp;
+    public int CurrentPlayerHp => currentHp;
 }

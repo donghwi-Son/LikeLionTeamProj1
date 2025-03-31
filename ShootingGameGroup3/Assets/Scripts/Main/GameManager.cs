@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public MouseManager MouseManager;
     public Player Player;
     public WeaponManager WeaponManager;
+    public LYJ_SpawnManager SpawnManager;
     #endregion
 
 
@@ -127,5 +128,23 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // 중복 방지
         }
     }
+    string sceneName = SceneManager.GetActiveScene().name;
+    float currentStageTime;
+    public float CurrentStageTime => currentStageTime;
+    bool isTimeGoing;
+    
+
+    public void StopGame()
+    {
+        isTimeGoing = false;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        isTimeGoing = true;
+        Time.timeScale = 1;
+    }
+    
 
 }

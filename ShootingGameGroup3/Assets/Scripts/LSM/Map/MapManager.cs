@@ -10,6 +10,8 @@ public class MapManager : MonoBehaviour
 
     [SerializeField]
     private GameObject stage2MapPrefab;
+    [SerializeField]
+    private GameObject stage4MapPrefab;
 
     private GameObject currentMap;
     private int currentStage = 1;
@@ -66,6 +68,19 @@ public class MapManager : MonoBehaviour
         currentStage = 2;
         isStageCleared = false;
         currentMap = Instantiate(stage2MapPrefab);
+        // 스테이지 2 초기화 로직
+    }
+
+    public void StartStage4()
+    {
+        if (currentMap != null)
+        {
+            Destroy(currentMap);
+        }
+
+        currentStage = 4;
+        isStageCleared = false;
+        currentMap = Instantiate(stage4MapPrefab);
         // 스테이지 2 초기화 로직
     }
 
