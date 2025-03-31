@@ -6,7 +6,7 @@ public class sdh_EnemyAtt : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Player>().HPChange(-1);
+            collision.gameObject.GetComponent<sdh_Player>().GetHit();
 
         }
     }

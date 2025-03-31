@@ -162,7 +162,7 @@ public class sdh_DashEnemy : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().HPChange(-1);
+            collision.GetComponent<sdh_Player>().GetHit();
         }
     }
 }

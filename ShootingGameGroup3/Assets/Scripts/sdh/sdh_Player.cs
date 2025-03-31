@@ -118,8 +118,8 @@ public class sdh_Player : MonoBehaviour
         isDashCool = false;
     }
 
-    void GetHit()
+    public void GetHit()
     {
-        //�ǰ�ó��
+        Debug.Log("플레이어 피격");
     }
 }
