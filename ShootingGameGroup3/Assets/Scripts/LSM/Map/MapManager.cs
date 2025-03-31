@@ -13,9 +13,6 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     private GameObject stage2MapPrefab;
 
-    [SerializeField]
-    private GameObject stage4MapPrefab;
-
     [Header("Spawn Points")]
     [SerializeField]
     private Transform[] spawnPoints = new Transform[5];
@@ -31,7 +28,45 @@ public class MapManager : MonoBehaviour
     [SerializeField]
     private Transform playerSpawnPoint; // Unity Inspector에서 설정할 플레이어 시작 위치
 
+    [Header("Stage 2 Settings")]
+    [SerializeField]
+    private Transform playerSpawnPoint2;
+
+    [SerializeField]
+    private Transform bossSpawnPoint;
+
+    [SerializeField]
+    private GameObject cardQueenPrefab;
+
+    [Header("CardQueen Settings")]
+    [SerializeField]
+    private Transform[] queenSoldierSpawnPoints = new Transform[2];
+
+    [SerializeField]
+    private Transform queenBulletSpawnPoint;
+
+    [SerializeField]
+    private Transform queenLazerSpawnPoint; // 추가
+
+    [Header("Warning Areas")]
+    [SerializeField]
+    private GameObject WarningArea1;
+
+    [SerializeField]
+    private GameObject WarningArea2;
+
+    public Transform[] GetQueenSoldierSpawnPoints() => queenSoldierSpawnPoints;
+
+    public Transform GetQueenBulletSpawnPoint() => queenBulletSpawnPoint;
+
+    public Transform GetQueenLazerSpawnPoint() => queenLazerSpawnPoint;
+
+    public GameObject GetWarningArea1() => WarningArea1;
+
+    public GameObject GetWarningArea2() => WarningArea2;
+
     private GameObject currentMap;
+    private GameObject currentBoss;
     private int currentStage = 1;
     private int currentWave = 0;
     private bool isStageCleared = false;
@@ -265,22 +300,43 @@ public class MapManager : MonoBehaviour
         }
 
         currentStage = 2;
+        currentWave = 0;
         isStageCleared = false;
         currentMap = Instantiate(stage2MapPrefab);
-        // 스테이지 2 초기화 로직
-    }
 
-    public void StartStage4()
-    {
-        if (currentMap != null)
+        // 플레이어 위치 설정
+        if (GameManager.Instance.Player != null && playerSpawnPoint2 != null)
         {
-            Destroy(currentMap);
+            GameManager.Instance.Player.transform.position = playerSpawnPoint2.position;
         }
 
-        currentStage = 4;
-        isStageCleared = false;
-        currentMap = Instantiate(stage4MapPrefab);
-        // 스테이지 2 초기화 로직
+        // 보스(CardQueen) 생성
+        if (bossSpawnPoint != null && cardQueenPrefab != null)
+        {
+            currentBoss = Instantiate(
+                cardQueenPrefab,
+                bossSpawnPoint.position,
+                Quaternion.identity
+            );
+
+            // 보스 사망 이벤트 리스닝
+            LSM_Monster bossMonster = currentBoss.GetComponent<LSM_Monster>();
+            if (bossMonster != null)
+            {
+                StartCoroutine(CheckBossDeath());
+            }
+        }
+    }
+
+    private IEnumerator CheckBossDeath()
+    {
+        while (currentBoss != null)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // 보스가 파괴되면 스테이지 클리어
+        ClearCurrentStage();
     }
 
     public void ClearCurrentStage()
@@ -289,8 +345,7 @@ public class MapManager : MonoBehaviour
 
         if (currentStage == 1)
         {
-            GameManager.Instance.ClearScene(); // 게임 클리어 처리
-            //StartStage2();
+            StartStage2();
         }
         else if (currentStage == 2)
         {
