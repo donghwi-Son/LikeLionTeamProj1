@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
                 hp = 0;
                 Debug.Log("플레이어 사망");
                 // 현재 씬 다시 로드
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 return;
             }
             Debug.Log("피해 입음");

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (Instance == null)
         {
             Instance = this;
@@ -188,7 +189,7 @@ public class GameManager : MonoBehaviour
         isFading = false;
         yield return null;
     }
-    string sceneName = SceneManager.GetActiveScene().name;
+    
     float currentStageTime;
     public float CurrentStageTime => currentStageTime;
     bool isTimeGoing;
