@@ -25,34 +25,27 @@ public class LYJ_BFShotGun : MonoBehaviour
     {
         _readyToShoot = true;
         // 이하 수치조정 필요, temp now
-        _damage = 3;
+        _damage = 7;
         _maxBullet = 7;
-        _attackDelay = new WaitForSeconds(2f);
+        _attackDelay = new WaitForSeconds(1.5f);
     }
 
     void OnEnable()
     {
-        // 플레이어 이동속도 감소
+        GameManager.Instance.Player.SpdChange(1.5f);
     }
 
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.FromToRotation(Vector3.right, LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position);
+        transform.rotation = Quaternion.FromToRotation(Vector3.right, GameManager.Instance.MouseManager.GetMousePos() - transform.position);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
-    }
 
     public void Fire()
     {
         if (!ReadyToShoot) { return; }
 
-        Vector2 direction = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
+        Vector2 direction = (GameManager.Instance.MouseManager.GetMousePos() - transform.position).normalized;
         float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // 이러면 굳이 X Y 따로 구할 필요 없음
 
 
@@ -72,7 +65,7 @@ public class LYJ_BFShotGun : MonoBehaviour
             Vector2 bulletVec = new Vector2(bulletVecX, bulletVecY).normalized;
 
 
-            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, 5f/*temp*/);
+            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, _damage);
 
             Destroy(currentBullet, 1f);
         }

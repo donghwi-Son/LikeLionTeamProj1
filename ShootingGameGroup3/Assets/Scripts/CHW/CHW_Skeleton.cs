@@ -16,6 +16,10 @@ public class Skeleton : MonoBehaviour
 
 
 
+    
+    public AudioClip chw_throwBone;     // 뼈를 던질 때 재생할 사운드 클립 
+    public AudioClip chw_dieSkeleton;   // 사망 사운드
+
     Animator eAnimator;
     public GameObject bonePrefab;
     void Start()
@@ -51,6 +55,7 @@ public class Skeleton : MonoBehaviour
             killedSkeletons++;
             spawnManager?.RemoveSkeleton(gameObject);
             Destroy(gameObject);
+            AudioSource.PlayClipAtPoint(chw_dieSkeleton, transform.position);
 
             // 한 웨이브의 3마리가 죽었으면
             if (killedSkeletons >= 3)
@@ -86,6 +91,7 @@ public class Skeleton : MonoBehaviour
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bone.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        AudioSource.PlayClipAtPoint(chw_throwBone, transform.position);
     }
 
 

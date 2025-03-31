@@ -11,11 +11,25 @@ public class LHG_Bullet : MonoBehaviour
     private int currentBounces = 0; // 현재 바운스 횟수
 
     public GameObject Effect; // 발사체가 충돌했을 때 생성할 이펙트
+    public AudioClip hitSound; // 충돌 시 재생할 사운드 클립
+    public AudioClip shootSound; // 발사 시 재생할 사운드 클립
+    private AudioSource audioSource; // AudioSource 컴포넌트
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+    }
 
     // 발사체의 방향을 설정하는 메서드
     public void SetDirection(Vector2 dir)
     {
         direction = dir;
+    }
+
+    // 발사 메서드
+    public void Shoot()
+    {
+        PlayShootSound(); // 발사 사운드 재생
     }
 
     void Update()
@@ -39,12 +53,13 @@ public class LHG_Bullet : MonoBehaviour
         // 충돌한 객체가 "Monster" 태그를 가진 경우
         if (collision.CompareTag("Monster"))
         {
-            LHG_Monster monster = collision.GetComponent<LHG_Monster>();           
+            LHG_Monster monster = collision.GetComponent<LHG_Monster>();
             if (monster != null)
             {
                 // 몬스터에게 피해를 줌
                 monster.TakeDamage(damage);
                 CreateEffect(); // 이펙트 생성
+                PlayHitSound(); // 사운드 재생
                 Bounce(collision.transform.position); // 바운스 처리
             }
         }
@@ -57,6 +72,7 @@ public class LHG_Bullet : MonoBehaviour
                 // 미니 몬스터에게 피해를 줌
                 miniMonster.TakeDamage(damage);
                 CreateEffect(); // 이펙트 생성
+                PlayHitSound(); // 사운드 재생
                 Bounce(collision.transform.position); // 바운스 처리
             }
         }
@@ -69,6 +85,7 @@ public class LHG_Bullet : MonoBehaviour
                 // 몬스터2에게 피해를 줌
                 monster2.TakeDamage(damage);
                 CreateEffect(); // 이펙트 생성
+                PlayHitSound(); // 사운드 재생
                 Bounce(collision.transform.position); // 바운스 처리
             }
         }
@@ -86,6 +103,24 @@ public class LHG_Bullet : MonoBehaviour
     {
         GameObject go = Instantiate(Effect, transform.position, Quaternion.identity);
         Destroy(go, 0.5f); // 0.5초 후 이펙트 오브젝트 삭제
+    }
+
+    // 사운드를 재생하는 메서드
+    void PlayHitSound()
+    {
+        if (hitSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(hitSound); // 사운드 재생
+        }
+    }
+
+    // 발사 사운드를 재생하는 메서드
+    void PlayShootSound()
+    {
+        if (shootSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSound); // 발사 사운드 재생
+        }
     }
 
     // 바운스 처리 메서드
