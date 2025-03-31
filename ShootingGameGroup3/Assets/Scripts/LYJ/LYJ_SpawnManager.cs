@@ -20,6 +20,7 @@ public class LYJ_SpawnManager : MonoBehaviour
         {
             spawnPoints.Add(transform.GetChild(i));
         }
+        StartNewWave();
     }
     void Update()
     {
