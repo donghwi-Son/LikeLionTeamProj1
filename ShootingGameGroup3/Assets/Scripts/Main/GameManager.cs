@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Scene Clear")]
     // 씬 클리어 상태 변수
     public bool isSceneCleared = false;
+
     // 씬 전환 순서 배열
     public string[] sceneOrder = new string[] { "MainScene", "CHW", "LHG", "LSM", "LYJ", "SDH" };
     public int stage { get; private set; } = 0;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("Fade Settings")]
     // 전체 화면을 덮는 UI Image (Inspector에서 연결)
     public Image fadeImage;
+
     // 페이드 효과에 걸리는 시간 (초)
     public float fadeDuration = 1f;
 
@@ -39,6 +41,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // 중복 방지
         }
+
+        string sceneName = SceneManager.GetActiveScene().name;
     }
 
     private void OnEnable()
@@ -188,11 +192,10 @@ public class GameManager : MonoBehaviour
         isFading = false;
         yield return null;
     }
-    string sceneName = SceneManager.GetActiveScene().name;
+
     float currentStageTime;
     public float CurrentStageTime => currentStageTime;
     bool isTimeGoing;
-    
 
     public void StopGame()
     {
@@ -205,5 +208,4 @@ public class GameManager : MonoBehaviour
         isTimeGoing = true;
         Time.timeScale = 1;
     }
-    
 }
