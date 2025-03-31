@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class LYJ_UIManager : MonoBehaviour
 {
-    enum UIType { WeaponSlot, HP }
+    public enum UIType { WeaponSlot, HP }
 
     Sprite banWeaponIcon;
     Sprite selectWeaponIcon;
     Sprite normalWeaponIcon;
     List<GameObject> Hearts;
     GameObject HeartIcon;
-    UIType type;
+    public UIType type;
 
     void Awake()
     {

@@ -37,7 +37,7 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     {
         if (!gameObject.activeSelf) { return; }
         timer += Time.deltaTime;
-        if (timer > 5f) { PoolManager.Instance.ReturnGameObject(gameObject); }
+        if (timer > 5f) { ReturnPlease(); }
     }
 
     void FixedUpdate()
@@ -66,6 +66,12 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         if (!gameObject.activeSelf) { return; }
         if (!collision.CompareTag("Monster")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
-        PoolManager.Instance.ReturnGameObject(gameObject);
+        ReturnPlease();
+    }
+
+    void ReturnPlease()
+    {
+        GameObject hand = GameObject.Find("alcoholHand");
+        hand.GetComponent<LYJ_AlcoholBurnerHand>().ReturnBurner();
     }
 }
