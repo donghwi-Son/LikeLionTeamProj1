@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8060482834407040764}
   - component: {fileID: 1271585555997321970}
   m_Layer: 0
-  m_Name: Mini_Slime
+  m_Name: LHG_Mini_Slime
   m_TagString: MiniMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
