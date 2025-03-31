@@ -5,6 +5,9 @@ public class LYJ_UIManager : MonoBehaviour
 {
     enum UIType { WeaponSlot, HP }
 
+    Sprite banWeaponIcon;
+    Sprite selectWeaponIcon;
+    Sprite normalWeaponIcon;
     List<GameObject> Hearts;
     GameObject HeartIcon;
     UIType type;
@@ -22,18 +25,17 @@ public class LYJ_UIManager : MonoBehaviour
                 }
                 SetHpUI();
                 break;
-            case UIType.WeaponSlot:
-            
-                break;
+            // case UIType.WeaponSlot:
+            //     break;
         }
 
     }
 
     public void SetHpUI()
     {
-        foreach (var item in Hearts)
+        foreach (var heart in Hearts)
         {
-            item.SetActive(false);
+            heart.SetActive(false);
         }
 
         for (int i = 0; i < LYJ_GameManager.Instance.Player.CurrentPlayerHp; ++i)
@@ -41,4 +43,41 @@ public class LYJ_UIManager : MonoBehaviour
             Hearts[i].SetActive(true);
         }
     }
+
+    public void BanWeaponUI(int stage)
+    {
+        for (int i = 0; i < 8; ++i)
+        {
+            transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = banWeaponIcon;
+        }
+
+        switch (stage)
+        {
+            case 1:
+                transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                break;
+            case 2:
+                transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                break;
+            case 3:
+                transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                break;
+            case 4:
+                transform.GetChild(4).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                transform.GetChild(5).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                transform.GetChild(6).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                break;
+            case 5:
+                transform.GetChild(7).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+                break;
+        }
+    }
+
+    public void SelectWeaponUI(int previousWeaponNo,int currentWeaponNo)
+    {
+        transform.GetChild(previousWeaponNo+1).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
+        transform.GetChild(currentWeaponNo+1).GetComponent<SpriteRenderer>().sprite = selectWeaponIcon;
+    }
+
 }

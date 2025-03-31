@@ -41,7 +41,8 @@ public class CHW_BoomerangShooter : MonoBehaviour
 
     private void FollowPlayer()
     {
-        if (player == null) return;
+        if (player == null)
+            return;
 
         Vector3 playerPosition = player.position;
         float direction = player.localScale.x;
@@ -49,23 +50,30 @@ public class CHW_BoomerangShooter : MonoBehaviour
         if ((direction > 0 && !facingRight) || (direction < 0 && facingRight))
         {
             facingRight = !facingRight;
-            offset.x = -offset.x; // ÁÂ¿ì ¹ÝÀü
+            offset.x = -offset.x; // ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
 
-        transform.position = new Vector3(playerPosition.x + offset.x, playerPosition.y + offset.y, 0f);
+        transform.position = new Vector3(
+            playerPosition.x + offset.x,
+            playerPosition.y + offset.y,
+            0f
+        );
     }
 
-    private void ThrowBoomerang()
-
-     
+    public void ThrowBoomerang()
     {
-        if (!canThrowBoomerang) return;
+        if (!canThrowBoomerang)
+            return;
         canThrowBoomerang = false;
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
 
         Vector3 throwDirection = (mousePosition - transform.position).normalized;
-        GameObject boomerang = Instantiate(boomerangPrefab, transform.position, Quaternion.identity);
+        GameObject boomerang = Instantiate(
+            boomerangPrefab,
+            transform.position,
+            Quaternion.identity
+        );
 
         CHW_Boomerang boomerangScript = boomerang.GetComponent<CHW_Boomerang>();
         if (boomerangScript != null)
@@ -82,7 +90,6 @@ public class CHW_BoomerangShooter : MonoBehaviour
             audioSource.Play();
         }
     }
-
 
     public void RetrieveBoomerang()
     {

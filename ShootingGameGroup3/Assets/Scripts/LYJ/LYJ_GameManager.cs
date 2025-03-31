@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
 
 public class LYJ_GameManager : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class LYJ_GameManager : MonoBehaviour
     public LYJ_Aiming Aim ;
     public LYJ_Player Player ;
     public LYJ_WeaponManager WeaponManager;
+    public LYJ_SpawnManager SpawnManager;
     #endregion
 
 
@@ -28,14 +32,22 @@ public class LYJ_GameManager : MonoBehaviour
 
     #region 아직 메인으로 안 옮긴 부분
     
+    string sceneName = SceneManager.GetActiveScene().name;
     float currentStageTime;
     public float CurrentStageTime => currentStageTime;
     bool isTimeGoing;
     void Update()
     {
-        currentStageTime += Time.deltaTime;
+        if (sceneName != "LYJ")
+        {
+            currentStageTime += Time.deltaTime;
+            if (SpawnManager.CurrentWave > 5 && GameObject.FindGameObjectWithTag("Monster") == null)
+            {
+                // 씬 전환
+            }
+        }
     }
-    
+
     public void StopGame()
     {
         isTimeGoing = false;
@@ -47,6 +59,7 @@ public class LYJ_GameManager : MonoBehaviour
         isTimeGoing = true;
         Time.timeScale = 1;
     }
+    
 
     #endregion
 }
