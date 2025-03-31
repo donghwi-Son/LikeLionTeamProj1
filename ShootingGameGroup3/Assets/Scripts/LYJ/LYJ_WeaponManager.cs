@@ -5,9 +5,12 @@ public class LYJ_WeaponManager : MonoBehaviour
 {
     enum WeaponName { /*샷건, 라이플*/ };
     List<GameObject> allWeapons;
+    public List<GameObject> AllWeapons => allWeapons;
     Queue<GameObject> selectableWeapons;
     WeaponName currentWeaponName;
     GameObject currentWeapon;
+
+    float chargeTime;
 
     void SetSelectableWeapon()
     {
@@ -41,7 +44,7 @@ public class LYJ_WeaponManager : MonoBehaviour
         }
     }
 
-    public void ChargeSkill()
+    public void ChargeSkill() // 이거 구현 어떻게 할지 고민 좀더 해봐야함
     {
         switch (currentWeaponName)
         {

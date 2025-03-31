@@ -72,6 +72,13 @@ public class LHG_Bullet : MonoBehaviour
                 Bounce(collision.transform.position); // 바운스 처리
             }
         }
+        // 충돌한 객체가 "Player" 태그를 가진 경우 (플레이어와의 충돌 처리)
+        else if (collision.CompareTag("Player"))
+        {
+            // 플레이어와의 충돌 시 아무런 행동도 하지 않음
+            // 또는 발사체를 삭제할 수 있습니다.
+            Destroy(gameObject); // 발사체 삭제
+        }
     }
 
     // 이펙트를 생성하는 메서드

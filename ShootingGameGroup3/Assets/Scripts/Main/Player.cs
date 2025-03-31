@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.MouseManager.GetMousePos().x < transform.position.x)
         {
             playerSpriteRenderer.flipX = true;
-            // 무기 뒤집기는 따로 분리
+            // 무기 뒤집기는 따로 분리  
         }
         else
         {

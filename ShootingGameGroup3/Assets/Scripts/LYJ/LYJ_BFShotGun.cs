@@ -72,12 +72,12 @@ public class LYJ_BFShotGun : MonoBehaviour
             Vector2 bulletVec = new Vector2(bulletVecX, bulletVecY).normalized;
 
 
-            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/);
+            currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(bulletVec, 15f/*temp*/, 5f/*temp*/);
 
             Destroy(currentBullet, 1f);
         }
         // Vector3 kickBack = -(GameManager.Instance.Aim.GetMousePos() - GameManager.Instance.Player.transform.position).normalized;
-        Vector3 kickBack = -(direction.normalized);
+        Vector3 kickBack = -direction.normalized;
         LYJ_GameManager.Instance.Player.KickBackRequest(kickBack, 20f/*temp*/);
         StartCoroutine(DelayFire());
     }
