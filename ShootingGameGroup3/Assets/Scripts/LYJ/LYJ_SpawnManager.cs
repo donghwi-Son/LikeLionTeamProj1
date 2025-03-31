@@ -39,7 +39,7 @@ public class LYJ_SpawnManager : MonoBehaviour
         for (int i = 0; i < 5+(3*currentWave); ++i)
         {
             int randomPointNo = Random.Range(0, spawnPoints.Count);
-            GameObject enemy = LYJ_PoolManager.Instance.GetGameObject(enemies[i]);
+            GameObject enemy = PoolManager.Instance.GetGameObject(enemies[i]);
             enemy.transform.position = spawnPoints[randomPointNo].position;
         }
         currentWave++;
