@@ -7,19 +7,13 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     private float _damage;
     public float Damage => _damage;
 
-    private bool _readyToShoot;
-    public bool ReadyToShoot => _readyToShoot;
-
-    private int _maxBullet;
-    public int MaxBullet => _maxBullet;
-
-    private WaitForSeconds _attackDelay;
-    public WaitForSeconds AttackDelay => _attackDelay;
     #endregion
 
     WaitForSeconds rotationTerm;
     Rigidbody2D _rb;
     float moveSpeed;
+
+    // float timer;
 
     Vector2 targetVec;
     [SerializeField]
@@ -31,16 +25,24 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         rotationTerm = new WaitForSeconds(0.5f);
     }
 
-    public void ThrowBurner()
+    void OnEnable()
     {
         StartCoroutine(RotateRandom());
         moveSpeed = 3f;
-        targetVec = LYJ_GameManager.Instance.Aim.GetMousePos()-transform.position;
+        _damage = 4f;
+        targetVec = GameManager.Instance.MouseManager.GetMousePos()-transform.position;
         Destroy(gameObject, 5f);
+    }
+
+    void Update()
+    {
+        if (!gameObject.activeSelf) { return; }
+        // timer += Time.deltaTime;
     }
 
     void FixedUpdate()
     {
+        if (!gameObject.activeSelf) { return; }
         Vector2 newDir = Vector2.Lerp(_rb.linearVelocity.normalized, targetVec.normalized, 0.3f);
         // targetVec = Vector2.Lerp(targetVec, transform.up, 0.1f);
         _rb.linearVelocity = newDir * moveSpeed;
@@ -61,8 +63,15 @@ public class LYJ_AlcoholBurner : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy")) { return; }
+        if (!gameObject.activeSelf) { return; }
+        if (!collision.CompareTag("Monster")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        // ReturnPlease();
     }
+
+    // void ReturnPlease()
+    // {
+    //     GameObject hand = GameObject.Find("alcoholHand");
+    //     // hand.GetComponent<LYJ_AlcoholBurnerHand>().ReturnBurner();
+    // }
 }

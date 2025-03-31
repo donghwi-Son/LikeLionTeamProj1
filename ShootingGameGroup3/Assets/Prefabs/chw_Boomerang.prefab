@@ -166,6 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  boomerangRange: 6
+  boomerangRange: 4
   rotationSpeed: 720
   returnSpeedMultiplier: 1.5

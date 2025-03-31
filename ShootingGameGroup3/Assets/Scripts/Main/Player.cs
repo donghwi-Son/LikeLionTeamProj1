@@ -220,6 +220,7 @@ public class Player : MonoBehaviour
                 hp = MAX_HP;
             }
         }
+        Debug.Log("HP: " + hp);
     }
 
     private IEnumerator InvincibleRoutine()
@@ -253,4 +254,24 @@ public class Player : MonoBehaviour
     {
         aas += num;
     }
+
+    public void KickBackRequest(Vector3 vec, float amount)
+    {
+        StartCoroutine(KickBack(vec, amount));
+    }
+
+    IEnumerator KickBack(Vector3 vec, float Amount)
+    {
+        isKickBacked = true;
+        rb.linearVelocity = vec * Amount;
+        yield return new WaitForSeconds(0.2f);
+        isKickBacked = false;
+        
+    }
+
+    int maxHp = 7; // temp
+    int baseHp = 5;
+    int currentHp = 5;
+    public int BasePlayerHp => baseHp;
+    public int CurrentPlayerHp => currentHp;
 }

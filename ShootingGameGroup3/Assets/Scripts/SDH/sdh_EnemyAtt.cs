@@ -6,7 +6,8 @@ public class sdh_EnemyAtt : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player Attacked");
+            collision.gameObject.GetComponent<Player>().HPChange(-1);
+
         }
     }
 }

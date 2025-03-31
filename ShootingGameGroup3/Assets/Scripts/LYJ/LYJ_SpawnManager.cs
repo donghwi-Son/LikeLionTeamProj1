@@ -3,33 +3,45 @@ using UnityEngine;
 
 public class LYJ_SpawnManager : MonoBehaviour
 {
+    [SerializeField]
     List<GameObject> enemies;
     List<Transform> spawnPoints;
-    float waveInterval;
-    int currentWave;
+    float waveInterval = 30f;
+    int currentWave = 0;
     public int CurrentWave => currentWave;
 
     void Awake()
     {
+        spawnPoints = new List<Transform>();
         foreach (var item in enemies)
         {
-            LYJ_PoolManager.Instance.CreatePool(item, 10);
+            PoolManager.Instance.CreatePool(item, 10);
         }
+        for (int i = 0; i < transform.childCount; ++i)
+        {
+            spawnPoints.Add(transform.GetChild(i));
+        }
+        StartNewWave();
     }
     void Update()
     {
-        if (LYJ_GameManager.Instance.CurrentStageTime >= waveInterval)
+        if (currentWave > 5) { return; }
+        if (GameManager.Instance.CurrentStageTime % waveInterval == 0)
         {
-            StartWave();
+            StartNewWave();
+        }
+        if (CurrentWave > 5 && GameObject.FindGameObjectWithTag("Monster") == null)
+        {
+            GameManager.Instance.ClearScene();
         }
     }
 
-    void StartWave()
+    void StartNewWave()
     {
-        for (int i = 0; i < 5+currentWave; ++i)
+        for (int i = 0; i < 5+(3*currentWave); ++i)
         {
             int randomPointNo = Random.Range(0, spawnPoints.Count);
-            GameObject enemy = LYJ_PoolManager.Instance.GetGameObject(enemies[i]);
+            GameObject enemy = PoolManager.Instance.GetGameObject(enemies[i]);
             enemy.transform.position = spawnPoints[randomPointNo].position;
         }
         currentWave++;
