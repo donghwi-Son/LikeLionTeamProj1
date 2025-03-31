@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public MouseManager MouseManager;
     public Player Player;
     public WeaponManager WeaponManager;
+    public LYJ_SpawnManager SpawnManager;
+    #endregion
 
     [Header("Scene Clear")]
     // 씬 클리어 상태 변수
@@ -182,4 +184,22 @@ public class GameManager : MonoBehaviour
         isFading = false;
         yield return null;
     }
+    string sceneName = SceneManager.GetActiveScene().name;
+    float currentStageTime;
+    public float CurrentStageTime => currentStageTime;
+    bool isTimeGoing;
+    
+
+    public void StopGame()
+    {
+        isTimeGoing = false;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        isTimeGoing = true;
+        Time.timeScale = 1;
+    }
+    
 }

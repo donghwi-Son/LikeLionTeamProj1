@@ -18,7 +18,7 @@ public class LYJ_UIManager : MonoBehaviour
         {
             case UIType.HP:
                 Hearts = new List<GameObject>();
-                for (int i = 0; i < LYJ_GameManager.Instance.Player.BasePlayerHp; ++i)
+                for (int i = 0; i < GameManager.Instance.Player.BasePlayerHp; ++i)
                 {
                     GameObject heart = Instantiate(HeartIcon, transform);
                     Hearts.Add(heart);
@@ -38,7 +38,7 @@ public class LYJ_UIManager : MonoBehaviour
             heart.SetActive(false);
         }
 
-        for (int i = 0; i < LYJ_GameManager.Instance.Player.CurrentPlayerHp; ++i)
+        for (int i = 0; i < GameManager.Instance.Player.CurrentPlayerHp; ++i)
         {
             Hearts[i].SetActive(true);
         }
@@ -79,5 +79,5 @@ public class LYJ_UIManager : MonoBehaviour
         transform.GetChild(previousWeaponNo+1).GetComponent<SpriteRenderer>().sprite = normalWeaponIcon;
         transform.GetChild(currentWeaponNo+1).GetComponent<SpriteRenderer>().sprite = selectWeaponIcon;
     }
-
+    
 }

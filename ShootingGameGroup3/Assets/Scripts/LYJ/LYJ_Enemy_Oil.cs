@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class LYJ_Enemy_Oil : LYJ_NormalEnemy
+public class LYJ_Enemy_Oil : MonoBehaviour
 {
     const float FIRE_CHANCE = 0.1f;
     const float BURN_DAMAGE = 0.5f;
@@ -29,7 +29,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         oilDropInterval = new WaitForSeconds(2f);
         burnDelay = new WaitForSeconds(BURN_DELAY);
         spriteRenderer = GetComponent<SpriteRenderer>();
-        target = LYJ_GameManager.Instance.Player.transform;
+        target = GameManager.Instance.Player.transform;
         isHitRecent = false;
         isHitWithOil = false;
     }
@@ -37,7 +37,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
     void OnEnable()
     {
         StartCoroutine(DropOil());
-        hp = hpForWave[LYJ_GameManager.Instance.SpawnManager.CurrentWave];
+        hp = hpForWave[GameManager.Instance.SpawnManager.CurrentWave];
         isHitRecent = false;
         isHitWithOil = false;
         burnStack = 0;
@@ -85,7 +85,7 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
                 return;
             }
         }
-        target = LYJ_GameManager.Instance.Player.transform;
+        target = GameManager.Instance.Player.transform;
     }
     void FixedUpdate()
     {
@@ -143,6 +143,6 @@ public class LYJ_Enemy_Oil : LYJ_NormalEnemy
         StopCoroutine(Burn());
         StopCoroutine(DropOil());
         burnStack = 0;
-        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
+        PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }

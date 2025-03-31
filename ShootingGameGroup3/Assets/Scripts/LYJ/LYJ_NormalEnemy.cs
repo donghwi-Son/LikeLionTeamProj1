@@ -17,14 +17,14 @@ public class LYJ_NormalEnemy : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        target = LYJ_GameManager.Instance.Player.transform;
+        target = GameManager.Instance.Player.transform;
         isHitRecent = false;
         isHitWithOil = false;
     }
 
     void OnEnable()
     {
-        hp = hpForWave[LYJ_GameManager.Instance.SpawnManager.CurrentWave];
+        hp = hpForWave[GameManager.Instance.SpawnManager.CurrentWave];
         isHitRecent = false;
         isHitWithOil = false;
     }
@@ -69,7 +69,7 @@ public class LYJ_NormalEnemy : MonoBehaviour
                 return;
             }
         }
-        target = LYJ_GameManager.Instance.Player.transform;
+        target = GameManager.Instance.Player.transform;
     }
     void FixedUpdate()
     {
@@ -95,6 +95,6 @@ public class LYJ_NormalEnemy : MonoBehaviour
     void Die()
     {
         StopCoroutine(HitReaction());
-        LYJ_PoolManager.Instance.ReturnGameObject(gameObject);
+        PoolManager.Instance.ReturnGameObject(gameObject);
     }
 }

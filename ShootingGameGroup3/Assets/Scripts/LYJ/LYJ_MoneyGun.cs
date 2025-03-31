@@ -28,14 +28,14 @@ public class LYJ_MoneyGun : MonoBehaviour
 
     public void FireBuck()
     {
-        Vector2 directionVec = LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position;
+        Vector2 directionVec = GameManager.Instance.MouseManager.GetMousePos() - transform.position;
         GameObject currentMoney = Instantiate(money, transform.position, Quaternion.identity);
         currentMoney.GetComponent<LYJ_Money>().ShootMoney(directionVec, 3f/*temp*/);
     }
 
     public void FireCoin()
     {
-        Vector2 directionVec = (LYJ_GameManager.Instance.Aim.GetMousePos() - transform.position).normalized;
+        Vector2 directionVec = (GameManager.Instance.MouseManager.GetMousePos() - transform.position).normalized;
         GameObject currentBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         currentBullet.GetComponent<LYJ_Bullet>().ShootBullet(directionVec, 10f/*temp*/, _damage);
         StartCoroutine(DelayFire());

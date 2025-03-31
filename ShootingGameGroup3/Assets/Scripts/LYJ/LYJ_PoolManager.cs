@@ -18,14 +18,14 @@ public class LYJ_PoolManager : MonoBehaviour
         }
     }
 
-    private Dictionary<string, LYJ_ObjectPool> _pools = new Dictionary<string, LYJ_ObjectPool>();
+    private Dictionary<string, ObjectPool> _pools = new Dictionary<string, ObjectPool>();
 
     public void CreatePool(GameObject prefab, int initSize)
     {
         string key = prefab.name;
         if(!_pools.ContainsKey(key))
         {
-            _pools.Add(key, new LYJ_ObjectPool(prefab, initSize, transform));
+            _pools.Add(key, new ObjectPool(prefab, initSize, transform));
         }
     }
 
