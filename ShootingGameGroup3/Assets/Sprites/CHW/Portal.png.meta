@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 3dde6fccf906e654280cd00a8ed0c36c
+guid: 791024e0122986f41ac71936267e6bf0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7110878671101974141
-    second: dash_0
+      213: -1160010366554915182
+    second: Dimensional_Portal_0
   - first:
-      213: 7643240275301989466
-    second: dash_1
+      213: 5853386924358050850
+    second: Dimensional_Portal_1
   - first:
-      213: -8809873816130030523
-    second: dash_2
+      213: 4392103141360296039
+    second: Dimensional_Portal_2
   - first:
-      213: -4770175892979620097
-    second: dash_3
+      213: -1678251164886203106
+    second: Dimensional_Portal_3
   - first:
-      213: -1190105860681885623
-    second: dash_4
+      213: 378231322344738570
+    second: Dimensional_Portal_4
   - first:
-      213: 8035217175372748222
-    second: dash_5
+      213: -4773631299378667110
+    second: Dimensional_Portal_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -154,13 +154,79 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dash_0
+      name: Portal_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4def08e468bb3d44a7cfe5cf961bf8e
+      internalID: -467069869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Portal_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8896fc686c342b44db2c2b488c30cff0
+      internalID: -1284558169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Portal_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33108900ec76af547b46a67fb1bdca76
+      internalID: -628217967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Portal_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 24
-        height: 24
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40ea2302ec77afe49bd4cfab52d4aa71
-      internalID: 864340266
+      spriteID: dc4676f70f7543c43bc669f99e1e8913
+      internalID: -773124329
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dash_1
+      name: Portal_4
       rect:
         serializedVersion: 2
-        x: 24
+        x: 32
         y: 0
-        width: 24
-        height: 24
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddad4527c65207c498f6c05861486ff9
-      internalID: -1199571218
+      spriteID: fd25006075ffe064188d05bba502d81a
+      internalID: -693620117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dash_2
+      name: Portal_5
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 0
-        width: 24
-        height: 24
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,74 +279,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c361a602fca75f24d92ff09c01260b98
-      internalID: 1733483170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dash_3
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9e15d9ab57e436409846288bee841e1
-      internalID: 416326591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dash_4
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18667528f98bc94498bc095e9f258647
-      internalID: 496535038
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dash_5
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9886800c226dfc48968be57c19ee56a
-      internalID: 1471451679
+      spriteID: e3868658e7607364cbc999e15cac3c73
+      internalID: -506150095
       vertices: []
       indices: 
       edges: []
@@ -289,7 +289,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d75e24a4b312ddc44ae00e38a4fd5423
+    spriteID: 5ed9d6dbe9bec7f46b4b0d84d592f477
     internalID: 0
     vertices: []
     indices: 
@@ -299,12 +299,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      dash_0: 864340266
-      dash_1: -1199571218
-      dash_2: 1733483170
-      dash_3: 416326591
-      dash_4: 496535038
-      dash_5: 1471451679
+      Portal_0: -467069869
+      Portal_1: -1284558169
+      Portal_2: -628217967
+      Portal_3: -773124329
+      Portal_4: -693620117
+      Portal_5: -506150095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

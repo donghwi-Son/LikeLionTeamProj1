@@ -36,17 +36,7 @@ public class LYJ_GameManager : MonoBehaviour
     float currentStageTime;
     public float CurrentStageTime => currentStageTime;
     bool isTimeGoing;
-    void Update()
-    {
-        if (sceneName != "LYJ")
-        {
-            currentStageTime += Time.deltaTime;
-            if (SpawnManager.CurrentWave > 5 && GameObject.FindGameObjectWithTag("Monster") == null)
-            {
-                // 씬 전환
-            }
-        }
-    }
+    
 
     public void StopGame()
     {

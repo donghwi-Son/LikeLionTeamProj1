@@ -18,12 +18,18 @@ public class LYJ_AlcoholBurnerHand : MonoBehaviour
     {
         _readyToShoot = true;
         _attackDelay = new WaitForSeconds(0.5f);
+        PoolManager.Instance.CreatePool(burner, 10);
     }
     public void ThrowBurner()
     {
         if (!ReadyToShoot) { return; }
-        LYJ_PoolManager.Instance.GetGameObject(burner);
+        PoolManager.Instance.GetGameObject(burner);
+        burner.transform.position = GameManager.Instance.Player.transform.position;
         StartCoroutine(DelayFire());
+    }
+    public void ReturnBurner()
+    {
+        PoolManager.Instance.ReturnGameObject(burner);
     }
 
 

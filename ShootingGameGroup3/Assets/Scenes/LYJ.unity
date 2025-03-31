@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 133605453}
   - component: {fileID: 133605455}
   - component: {fileID: 133605454}
+  - component: {fileID: 133605456}
   m_Layer: 5
   m_Name: WeaponSlots
   m_TagString: Untagged
@@ -352,6 +353,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133605452}
   m_CullTransparentMesh: 1
+--- !u!114 &133605456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133605452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1c289a7aad90499626fc4122be2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &147381312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,6 +1079,7 @@ GameObject:
   - component: {fileID: 351580863}
   - component: {fileID: 351580862}
   - component: {fileID: 351580864}
+  - component: {fileID: 351580865}
   m_Layer: 5
   m_Name: HP
   m_TagString: Untagged
@@ -1156,6 +1171,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &351580865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351580860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1c289a7aad90499626fc4122be2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &359238019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6037cff3f2e0ad6478387d530aeeb59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 4109416686628902230, guid: 297547c306a676a41a542751fd829ee7, type: 3}
 --- !u!212 &1082557667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2530,7 +2558,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1082557670
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2715,7 +2743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MouseManager: {fileID: 1705823029}
   Player: {fileID: 1082557666}
-  WeaponManager: {fileID: 0}
+  WeaponManager: {fileID: 1609234174}
+  SpawnManager: {fileID: 1848314043}
   isSceneCleared: 0
   sceneOrder:
   - MainScene
@@ -2724,6 +2753,8 @@ MonoBehaviour:
   - LSM
   - LYJ
   - SDH
+  fadeImage: {fileID: 0}
+  fadeDuration: 1
 --- !u!1 &1210727179
 GameObject:
   m_ObjectHideFlags: 0
@@ -39379,6 +39410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1609234173}
+  - component: {fileID: 1609234174}
   m_Layer: 0
   m_Name: WeaponManager
   m_TagString: Untagged
@@ -39401,6 +39433,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1609234174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609234172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2a31055c1469a419402404d2884783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChargeRifle: {fileID: 0}
+  Boomerang: {fileID: 0}
+  Triump: {fileID: 0}
+  Muffin: {fileID: 0}
+  BFShotGun: {fileID: 4109416686628902230, guid: 297547c306a676a41a542751fd829ee7, type: 3}
+  AlcoholBurner: {fileID: 8329369415926274750, guid: fbcecc44c3d0c2c46aed12745930ffb1, type: 3}
+  MoneyGun: {fileID: 2789316299752311713, guid: e98e8aedaf012914d82fbae7f5bb5261, type: 3}
+  BounceGun: {fileID: 0}
+  gunPos: {fileID: 1082557668}
 --- !u!1 &1632342370
 GameObject:
   m_ObjectHideFlags: 0

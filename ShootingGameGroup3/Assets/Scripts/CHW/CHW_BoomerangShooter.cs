@@ -11,6 +11,25 @@ public class CHW_BoomerangShooter : MonoBehaviour
     private bool canThrowBoomerang = true;
     private GameObject currentBoomerang;
 
+
+    [Header("Boomerang Sound")]
+    // 부메랑이 회수될 때까지 반복 재생할 사운드 클립 (Inspector에서 할당)
+    public AudioClip chw_boomerang;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        // AudioSource 컴포넌트가 없으면 추가
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        // 사운드 클립 할당 및 루프 설정
+        audioSource.clip = chw_boomerang;
+        audioSource.loop = true;
+    }
+
     private void Update()
     {
         FollowPlayer();
@@ -65,10 +84,19 @@ public class CHW_BoomerangShooter : MonoBehaviour
         {
             Debug.LogError("Boomerang script not found on prefab!");
         }
+        // 부메랑이 회수되기 전까지 사운드 루프 재생
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
+        }
     }
 
     public void RetrieveBoomerang()
     {
         canThrowBoomerang = true;
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 }

@@ -14,19 +14,24 @@ public class LYJ_SpawnManager : MonoBehaviour
     {
         foreach (var item in enemies)
         {
-            LYJ_PoolManager.Instance.CreatePool(item, 10);
+            PoolManager.Instance.CreatePool(item, 10);
         }
         for (int i = 0; i < transform.childCount; ++i)
         {
             spawnPoints.Add(transform.GetChild(i));
         }
+        StartNewWave();
     }
     void Update()
     {
         if (currentWave > 5) { return; }
-        if (LYJ_GameManager.Instance.CurrentStageTime % waveInterval == 0)
+        if (GameManager.Instance.CurrentStageTime % waveInterval == 0)
         {
             StartNewWave();
+        }
+        if (CurrentWave > 5 && GameObject.FindGameObjectWithTag("Monster") == null)
+        {
+            GameManager.Instance.ClearScene();
         }
     }
 
@@ -35,7 +40,7 @@ public class LYJ_SpawnManager : MonoBehaviour
         for (int i = 0; i < 5+(3*currentWave); ++i)
         {
             int randomPointNo = Random.Range(0, spawnPoints.Count);
-            GameObject enemy = LYJ_PoolManager.Instance.GetGameObject(enemies[i]);
+            GameObject enemy = PoolManager.Instance.GetGameObject(enemies[i]);
             enemy.transform.position = spawnPoints[randomPointNo].position;
         }
         currentWave++;
