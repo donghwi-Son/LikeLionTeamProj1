@@ -182,7 +182,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -289,7 +289,8 @@ MonoBehaviour:
   BFShotGun: {fileID: 0}
   AlcoholBurner: {fileID: 0}
   MoneyGun: {fileID: 0}
-  gunPos: {fileID: 0}
+  BounceGun: {fileID: 0}
+  gunPos: {fileID: 2164423489049005981, guid: b788bea9474fe704fbd1bbfc91122ed4, type: 3}
 --- !u!4 &344145119
 Transform:
   m_ObjectHideFlags: 0
@@ -368,7 +369,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -515,6 +516,7 @@ MonoBehaviour:
   monsterPrefab1: {fileID: 7469652905674429870, guid: 7dbc44243d1dfec4c984e8ce1f4d94c7, type: 3}
   monsterPrefab2: {fileID: 4359734554846810443, guid: 6e926d8afeb63654898d204fb8687762, type: 3}
   spawnInterval: 2
+  gameOverText: {fileID: 0}
 --- !u!4 &620569236
 Transform:
   m_ObjectHideFlags: 0
@@ -781,7 +783,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7602669005564296130, guid: 9508f260b78870e478a1734466564f39, type: 3}
   firePoint: {fileID: 1480255996}
-  bulletSpawnPoint: {fileID: 0}
 --- !u!212 &1401025974
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -986,7 +987,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1164,7 +1165,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

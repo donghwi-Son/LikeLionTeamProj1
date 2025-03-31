@@ -101,6 +101,11 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(TransitionToNextScene());
         }
+        // 'K' 키를 눌렀을 때 씬 클리어 호출
+        if (Input.GetKeyDown(KeyCode.K)) // 'K' 키 사용
+        {
+            ClearScene();
+        }
     }
 
     // 외부에서 씬 클리어 처리를 요청할 때 호출

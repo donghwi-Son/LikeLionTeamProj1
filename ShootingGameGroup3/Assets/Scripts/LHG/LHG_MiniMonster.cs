@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class LHG_MiniMonster : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class LHG_MiniMonster : MonoBehaviour
     private Transform player; // 플레이어의 Transform
     public float chaseDistance = 10f; // 추적 거리
 
+    public AudioClip deathSound; // 몬스터 죽을 때 재생할 사운드 클립
+    private AudioSource audioSource; // AudioSource 컴포넌트
     private void Start()
     {
         // 태그가 "Player"인 게임 오브젝트를 찾아서 player 변수에 할당
@@ -54,6 +57,13 @@ public class LHG_MiniMonster : MonoBehaviour
         {
             // 피해를 받음
             TakeDamage(1);
+        }
+    }
+    private void PlayDeathSound()
+    {
+        if (deathSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(deathSound); // 죽을 때 사운드 재생
         }
     }
 }
