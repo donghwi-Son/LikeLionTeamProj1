@@ -2716,6 +2716,7 @@ MonoBehaviour:
   MouseManager: {fileID: 1705823029}
   Player: {fileID: 1082557666}
   WeaponManager: {fileID: 1609234174}
+  SpawnManager: {fileID: 1848314043}
   isSceneCleared: 0
   sceneOrder:
   - MainScene
@@ -39422,7 +39423,7 @@ MonoBehaviour:
   AlcoholBurner: {fileID: 8329369415926274750, guid: fbcecc44c3d0c2c46aed12745930ffb1, type: 3}
   MoneyGun: {fileID: 2789316299752311713, guid: e98e8aedaf012914d82fbae7f5bb5261, type: 3}
   BounceGun: {fileID: 0}
-  gunPos: {fileID: 0}
+  gunPos: {fileID: 1082557668}
 --- !u!1 &1632342370
 GameObject:
   m_ObjectHideFlags: 0
@@ -40809,52 +40810,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1848314042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1970668717
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1970668719}
-  - component: {fileID: 1970668718}
-  m_Layer: 0
-  m_Name: MapManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1970668718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970668717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19ae4d998a789a540917b07f4bdc0a8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stage1MapPrefab: {fileID: 0}
-  stage2MapPrefab: {fileID: 0}
---- !u!4 &1970668719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1970668717}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2005352006
 GameObject:
   m_ObjectHideFlags: 0
@@ -41255,7 +41210,6 @@ SceneRoots:
   - {fileID: 1705823028}
   - {fileID: 1609234173}
   - {fileID: 1848314042}
-  - {fileID: 1970668719}
   - {fileID: 147381316}
   - {fileID: 1082557668}
   - {fileID: 970597869}

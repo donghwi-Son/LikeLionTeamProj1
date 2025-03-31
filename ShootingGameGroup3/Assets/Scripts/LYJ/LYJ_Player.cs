@@ -59,27 +59,27 @@ void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            LYJ_GameManager.Instance.WeaponManager.ChangeBullet();
+            GameManager.Instance.WeaponManager.ChangeBullet();
         }
         
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            LYJ_GameManager.Instance.WeaponManager.ChangeWeapon();
+            GameManager.Instance.WeaponManager.ChangeWeapon();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
-            LYJ_GameManager.Instance.WeaponManager.NormalShoot();
+            GameManager.Instance.WeaponManager.NormalShoot();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            LYJ_GameManager.Instance.WeaponManager.SpecialSkill();
+            GameManager.Instance.WeaponManager.SpecialSkill();
         }
 
         if (Input.GetMouseButton(1))
         {
-            LYJ_GameManager.Instance.WeaponManager.ChargeSkill();
+            GameManager.Instance.WeaponManager.ChargeSkill();
         }
     }
 
