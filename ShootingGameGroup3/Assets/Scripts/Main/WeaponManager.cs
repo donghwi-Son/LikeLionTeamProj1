@@ -265,6 +265,12 @@ public class WeaponManager : MonoBehaviour
 
     void FlipGun()
     {
+        // GameManager나 Player가 없으면 함수 종료
+        if (GameManager.Instance == null || GameManager.Instance.Player == null)
+        {
+            return;
+        }
+
         Vector3 mousePos = GameManager.Instance.MouseManager.GetMousePos();
         Vector3 gunScale = gunPos.localScale;
         Vector3 gunLocalPos = gunPos.localPosition;

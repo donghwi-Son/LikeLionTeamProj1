@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -58,13 +58,16 @@ public class GameManager : MonoBehaviour
     // 새로운 씬이 로드되면 isSceneCleared를 false로 초기화하고, stage 값을 업데이트한 뒤 페이드 인 실행
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 씬 전환 시 화면이 완전히 검게 되어 있다면 alpha를 1로 설정
+        // 씬이 로드될 때마다 새로운 Player 찾아서 연결
+        Player = FindObjectOfType<Player>();
+
         if (fadeImage != null)
         {
             Color color = fadeImage.color;
             color.a = 1f;
             fadeImage.color = color;
         }
+
         isSceneCleared = false;
         UpdateStage(scene.name);
         StartCoroutine(FadeIn());
@@ -154,12 +157,17 @@ public class GameManager : MonoBehaviour
     // 페이드 아웃: 화면이 서서히 검게 변하며, 그동안 게임 진행은 중지됨
     private IEnumerator FadeOut()
     {
+        if (fadeImage == null)
+        {
+            yield break;
+        }
+
         isFading = true;
-        // 게임 진행 중지를 위해 타임 스케일 0으로 설정 (Fade 효과는 Time.unscaledDeltaTime 사용)
         Time.timeScale = 0f;
         float timer = 0f;
         Color color = fadeImage.color;
-        while (timer < fadeDuration)
+
+        while (timer < fadeDuration && fadeImage != null)
         {
             timer += Time.unscaledDeltaTime;
             float alpha = Mathf.Lerp(0f, 1f, timer / fadeDuration);
@@ -167,17 +175,29 @@ public class GameManager : MonoBehaviour
             fadeImage.color = color;
             yield return null;
         }
-        color.a = 1f;
-        fadeImage.color = color;
+
+        if (fadeImage != null)
+        {
+            color.a = 1f;
+            fadeImage.color = color;
+        }
         yield return null;
     }
 
     // 페이드 인: 씬 로드 후 화면이 서서히 밝아지며, 완료되면 게임 진행을 재개
     private IEnumerator FadeIn()
     {
+        if (fadeImage == null)
+        {
+            Time.timeScale = 1f;
+            isFading = false;
+            yield break;
+        }
+
         float timer = 0f;
         Color color = fadeImage.color;
-        while (timer < fadeDuration)
+
+        while (timer < fadeDuration && fadeImage != null)
         {
             timer += Time.unscaledDeltaTime;
             float alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
@@ -185,9 +205,13 @@ public class GameManager : MonoBehaviour
             fadeImage.color = color;
             yield return null;
         }
-        color.a = 0f;
-        fadeImage.color = color;
-        // 게임 진행 재개
+
+        if (fadeImage != null)
+        {
+            color.a = 0f;
+            fadeImage.color = color;
+        }
+
         Time.timeScale = 1f;
         isFading = false;
         yield return null;
