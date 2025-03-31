@@ -13,7 +13,7 @@ public class LYJ_AlcoholBurner : MonoBehaviour
     Rigidbody2D _rb;
     float moveSpeed;
 
-    float timer;
+    // float timer;
 
     Vector2 targetVec;
     [SerializeField]
@@ -31,13 +31,13 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         moveSpeed = 3f;
         _damage = 4f;
         targetVec = GameManager.Instance.MouseManager.GetMousePos()-transform.position;
+        Destroy(gameObject, 5f);
     }
 
     void Update()
     {
         if (!gameObject.activeSelf) { return; }
-        timer += Time.deltaTime;
-        if (timer > 5f) { ReturnPlease(); }
+        // timer += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -66,12 +66,12 @@ public class LYJ_AlcoholBurner : MonoBehaviour
         if (!gameObject.activeSelf) { return; }
         if (!collision.CompareTag("Monster")) { return; }
         Instantiate(boom, transform.position, Quaternion.identity);
-        ReturnPlease();
+        // ReturnPlease();
     }
 
-    void ReturnPlease()
-    {
-        GameObject hand = GameObject.Find("alcoholHand");
-        hand.GetComponent<LYJ_AlcoholBurnerHand>().ReturnBurner();
-    }
+    // void ReturnPlease()
+    // {
+    //     GameObject hand = GameObject.Find("alcoholHand");
+    //     // hand.GetComponent<LYJ_AlcoholBurnerHand>().ReturnBurner();
+    // }
 }

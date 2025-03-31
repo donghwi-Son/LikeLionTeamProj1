@@ -215,6 +215,7 @@ public class Player : MonoBehaviour
                 hp = MAX_HP;
             }
         }
+        Debug.Log("HP: " + hp);
     }
 
     private IEnumerator InvincibleRoutine()
