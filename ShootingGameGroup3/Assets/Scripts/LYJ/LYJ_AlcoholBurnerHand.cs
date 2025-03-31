@@ -23,6 +23,7 @@ public class LYJ_AlcoholBurnerHand : MonoBehaviour
     {
         if (!ReadyToShoot) { return; }
         PoolManager.Instance.GetGameObject(burner);
+        burner.transform.position = transform.position;
         StartCoroutine(DelayFire());
     }
 
