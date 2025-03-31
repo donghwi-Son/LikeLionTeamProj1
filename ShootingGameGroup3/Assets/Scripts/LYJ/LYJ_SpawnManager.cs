@@ -12,6 +12,7 @@ public class LYJ_SpawnManager : MonoBehaviour
 
     void Awake()
     {
+        spawnPoints = new List<Transform>();
         foreach (var item in enemies)
         {
             PoolManager.Instance.CreatePool(item, 10);
