@@ -23,14 +23,15 @@ public class LYJ_AlcoholBurnerHand : MonoBehaviour
     public void ThrowBurner()
     {
         if (!ReadyToShoot) { return; }
-        PoolManager.Instance.GetGameObject(burner);
+        // PoolManager.Instance.GetGameObject(burner);
+        Instantiate(burner);
         burner.transform.position = GameManager.Instance.Player.transform.position;
         StartCoroutine(DelayFire());
     }
-    public void ReturnBurner()
-    {
-        PoolManager.Instance.ReturnGameObject(burner);
-    }
+    // public void ReturnBurner()
+    // {
+    //     PoolManager.Instance.ReturnGameObject(burner);
+    // }
 
 
 
