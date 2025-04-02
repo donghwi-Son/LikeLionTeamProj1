@@ -72,7 +72,8 @@ public class sdh_DashEnemy : MonoBehaviour
 
     IEnumerator Hit()
     {
-        DontMove();
+        if(!isattack)
+            DontMove();
         isHit = true;
         sr.material = flashM;
         yield return new WaitForSeconds(0.1f);

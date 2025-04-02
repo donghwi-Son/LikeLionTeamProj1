@@ -25,15 +25,19 @@ public class LYJ_SpawnManager : MonoBehaviour
     }
     void Update()
     {
-        if (currentWave > 5) { return; }
+        if (currentWave > 5)
+        {
+            if (GameObject.FindGameObjectWithTag("Monster") == null)
+            {
+                GameManager.Instance.ClearScene();
+            }
+            return; 
+        }
         if (GameManager.Instance.CurrentStageTime % waveInterval == 0)
         {
             StartNewWave();
         }
-        if (CurrentWave > 5 && GameObject.FindGameObjectWithTag("Monster") == null)
-        {
-            GameManager.Instance.ClearScene();
-        }
+        
     }
 
     void StartNewWave()

@@ -12,6 +12,7 @@ public class sdh_Player : MonoBehaviour
     public Transform fp;
     bool isRolling = false;
     bool isDashCool = false;
+    bool isCut = false;
 
 
     void Start()
@@ -24,13 +25,16 @@ public class sdh_Player : MonoBehaviour
 
     void Update()
     {
-        if (!isRolling)
+        if (!isCut)
         {
-            Move();
-            FlipPlayer();
+            if (!isRolling)
+            {
+                Move();
+                FlipPlayer();
+            }
+            FlipGun();
+            Roll();
         }
-        FlipGun();
-        Roll();
     }
 
     private void FlipPlayer()
@@ -121,5 +125,19 @@ public class sdh_Player : MonoBehaviour
     public void GetHit()
     {
         Debug.Log("플레이어 피격");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Cut"))
+        {
+            rb.linearVelocity = Vector2.zero;
+            isCut = true;
+        }
+    }
+
+    public void EndCut()
+    {
+        isCut = false;
     }
 }

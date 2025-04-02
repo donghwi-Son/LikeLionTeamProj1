@@ -19,7 +19,6 @@ public class LHG_SpawnManager : MonoBehaviour
     private void Start()
     {
         // 게임 종료 텍스트를 처음에 비활성화
-        gameOverText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -82,7 +81,7 @@ public class LHG_SpawnManager : MonoBehaviour
         else
         {
             // 모든 스테이지가 종료된 경우 게임 종료 텍스트 표시
-            ShowGameOverText();
+            GameManager.Instance.isSceneCleared = true;
         }
     }
 

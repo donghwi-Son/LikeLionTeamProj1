@@ -26,26 +26,22 @@ public class sdh_Gun : MonoBehaviour
 
 
 
+
+
         if (Input.GetMouseButtonDown(0))
-        {
-            Shoot(mouseWP);
-        }
-
-
-        if (Input.GetMouseButtonDown(1))
         {
             flashRoutineStart();
         }
 
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             Charging();
         }
 
 
 
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(0))
         {
             ShootOut(mouseWP);
         }

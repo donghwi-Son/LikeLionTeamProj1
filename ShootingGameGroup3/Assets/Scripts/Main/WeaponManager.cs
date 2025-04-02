@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
@@ -90,9 +89,9 @@ public class WeaponManager : MonoBehaviour
         {
             1 => new List<GameObject> { Boomerang },
             2 => new List<GameObject> { BounceGun },
-            3 => new List<GameObject> { Triump, Muffin },
-            4 => new List<GameObject> { BFShotGun, AlcoholBurner, MoneyGun },
-            5 => new List<GameObject> { ChargeRifle },
+            3 => new List<GameObject> { BFShotGun, AlcoholBurner, MoneyGun },
+            4 => new List<GameObject> { ChargeRifle },
+            5 => new List<GameObject> { Triump, Muffin },
             _ => new List<GameObject>()
         };
     }

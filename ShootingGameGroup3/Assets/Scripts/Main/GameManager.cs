@@ -5,20 +5,31 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindFirstObjectByType<GameManager>();
+            }
+            return _instance;
+        }
+    }
 
     [Header("Game Objects")]
     public MouseManager MouseManager;
     public Player Player;
     public WeaponManager WeaponManager;
     public LYJ_SpawnManager SpawnManager;
-
+    public PoolManager PoolManager;
     [Header("Scene Clear")]
     // 씬 클리어 상태 변수
     public bool isSceneCleared = false;
 
     // 씬 전환 순서 배열
-    public string[] sceneOrder = new string[] { "MainScene", "CHW", "LHG", "LSM", "LYJ", "SDH" };
+    string[] sceneOrder = new string[] { "MainScene", "CHW", "LHG", "LYJ", "SDH"};
     public int stage { get; private set; } = 0;
 
     [Header("Fade Settings")]
@@ -33,15 +44,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         
-        if (Instance == null)
-        {
-            Instance = this;
-            //DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject); // 중복 방지
-        }
 
         string sceneName = SceneManager.GetActiveScene().name;
     }
@@ -59,8 +61,7 @@ public class GameManager : MonoBehaviour
     // 새로운 씬이 로드되면 isSceneCleared를 false로 초기화하고, stage 값을 업데이트한 뒤 페이드 인 실행
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 씬이 로드될 때마다 새로운 Player 찾아서 연결
-        Player = FindObjectOfType<Player>();
+        
 
         if (fadeImage != null)
         {
@@ -69,7 +70,6 @@ public class GameManager : MonoBehaviour
             fadeImage.color = color;
         }
 
-        isSceneCleared = false;
         UpdateStage(scene.name);
         StartCoroutine(FadeIn());
     }
@@ -87,15 +87,15 @@ public class GameManager : MonoBehaviour
             case "LHG":
                 stage = 2;
                 break;
-            case "LSM":
+            case "LYJ":
                 stage = 3;
                 break;
-            case "LYJ":
+            case "SDH":
                 stage = 4;
                 break;
-            case "SDH":
-                stage = 5;
-                break;
+            //case "LSM":
+            //    stage = 5;
+            //    break;
             default:
                 stage = 0;
                 break;
@@ -108,6 +108,7 @@ public class GameManager : MonoBehaviour
         if (isSceneCleared && !isFading)
         {
             StartCoroutine(TransitionToNextScene());
+            isSceneCleared = false;
         }
         // 'K' 키를 눌렀을 때 씬 클리어 호출
         if (Input.GetKeyDown(KeyCode.K)) // 'K' 키 사용
@@ -152,6 +153,7 @@ public class GameManager : MonoBehaviour
     {
         yield return StartCoroutine(FadeOut());
         LoadNextScene();
+       
         // 씬 로드 후 OnSceneLoaded()에서 FadeIn()이 호출됨
     }
 

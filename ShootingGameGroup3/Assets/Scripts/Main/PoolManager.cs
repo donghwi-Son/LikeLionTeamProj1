@@ -3,16 +3,14 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    private static PoolManager _instance;
+    static PoolManager _instance;
     public static PoolManager Instance
     {
         get
         {
             if (_instance == null)
             {
-                GameObject instancePoolManager = new GameObject("PoolManager");
-                _instance = instancePoolManager.AddComponent<PoolManager>();
-                DontDestroyOnLoad(instancePoolManager);
+                _instance = FindFirstObjectByType<PoolManager>();
             }
             return _instance;
         }
